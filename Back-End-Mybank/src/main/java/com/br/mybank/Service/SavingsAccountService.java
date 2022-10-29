@@ -11,7 +11,7 @@ public interface SavingsAccountService {
 	
 	public Account generatedModelAccount();
 	
-	public void whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation);
+	public void whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) throws Exception;
 	
 	public Double findSaldoByAccountId(Long accountId);
 }

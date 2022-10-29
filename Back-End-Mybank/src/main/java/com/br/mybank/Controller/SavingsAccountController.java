@@ -20,7 +20,7 @@ public class SavingsAccountController {
 	protected SavingsAccountService savingsAccountService;
 	
 	@PostMapping("/withdraw-money")
-	public ResponseEntity<SavingsAccount> whithdrawMoney (@RequestBody WithdrawMoneyOperation withdrawMoneyOperation) {
+	public ResponseEntity<SavingsAccount> whithdrawMoney (@RequestBody WithdrawMoneyOperation withdrawMoneyOperation) throws Exception {
 	
 		this.savingsAccountService.whithdrawMoney(withdrawMoneyOperation);
 		

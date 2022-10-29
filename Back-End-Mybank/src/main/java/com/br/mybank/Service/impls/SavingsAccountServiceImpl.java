@@ -10,6 +10,7 @@ import com.br.mybank.Model.Account;
 import com.br.mybank.Model.SavingsAccount;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
 import com.br.mybank.Repository.SavingsAccountRepository;
+import com.br.mybank.Repository.WithdrawRepository;
 import com.br.mybank.Service.SavingsAccountService;
 
 @Service
@@ -18,6 +19,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
 	@Autowired
 	protected SavingsAccountRepository savingsAccountRepository;
+	
+	@Autowired
+	protected WithdrawRepository withdrawRepository;
 	
 	Random random = new Random();
 
@@ -64,15 +68,19 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	}
 
 	@Override
-	public void whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) {
+	public void whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) throws Exception  {
 		
 		Double currentSaldo = findSaldoByAccountId(withdrawMoneyOperation.getAccountId());
 		
+		
 		//Verify if account SALDO is enough for complete the withdraw// 
 		if(currentSaldo < withdrawMoneyOperation.getValue() ) {
-			throw new ArithmeticException("Não foi possivel completar a ação, Saldo insuficinte!");
+			throw new Exception("Unable to complete action, Insufficient balance!");
+
 		}else {
 			savingsAccountRepository.withDrawMoney((currentSaldo - withdrawMoneyOperation.getValue()), withdrawMoneyOperation.getAccountId());
+			withdrawMoneyOperation.setDate(LocalDate.now());
+			withdrawRepository.save(withdrawMoneyOperation);
 		}
 		
 	}
