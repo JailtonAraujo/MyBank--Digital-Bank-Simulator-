@@ -18,20 +18,23 @@ import lombok.Data;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(initialValue = 1, name = "seq_person")
+@SequenceGenerator(initialValue = 1, name = "seq_person_id")
 public abstract class Person implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_person")
+	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_person_id")
 	private Long id;
 	
 	private String name;
 	
 	private String lastname;
 	
-	@OneToOne(mappedBy = "person", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-	private AddressClass address;
+	@OneToOne( mappedBy = "person", cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
+	private Account account;
+	
+//	@OneToOne(mappedBy = "person", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+//	private AddressClass address;
 	
 
 }
