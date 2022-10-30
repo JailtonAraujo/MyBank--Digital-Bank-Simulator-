@@ -6,17 +6,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrMaskerModule } from 'br-mask';
 
 const AngularMaterialModules = [
   MatMenuModule,
   MatButtonModule,
   MatInputModule,
   MatIconModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSnackBarModule
 ]
+
 
 
 @NgModule({
@@ -24,11 +26,11 @@ const AngularMaterialModules = [
   imports: [
     CommonModule,
     AngularMaterialModules,
-
-
+    BrMaskerModule
   ],
   exports: [
     AngularMaterialModules,
+    BrMaskerModule
   ]
 })
 export class PublicModuleModule { }
