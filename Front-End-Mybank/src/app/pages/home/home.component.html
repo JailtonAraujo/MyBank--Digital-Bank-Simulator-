@@ -25,11 +25,22 @@
             </form>
         </div>
         <div class="brand">
-            <h1>Icon</h1>
+            <img src="assets/brand.png" alt="">
         </div>
     </div>
 </header>
-
 <main>
-    
+    <div class="container-main">
+        <div class="right-content">
+            <div class="title">Vem ser My BANK agora!</div>
+            <form>
+               <input type="text" name="cpf-or-cnpj" id="cpf-or-cnpj" [placeholder]="cpfOrCnpjplaceholder">
+               <mat-checkbox class="example-margin" (change)="changeInputCpfOrCnpjPlaceholder()">Pessoa juridica?</mat-checkbox>
+               <input type="submit" value="Continuar" class="btn-primary">
+            </form>
+            <div class="message-error">
+                *message error
+            </div>
+        </div>
+    </div>
 </main>
