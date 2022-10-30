@@ -73,7 +73,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		Double currentSaldo = findSaldoByAccountId(withdrawMoneyOperation.getAccountId());
 		
 		
-		//Verify if account SALDO is enough for complete the withdraw// 
+		//Verify if account balance is enough for complete the withdraw// 
 		if(currentSaldo < withdrawMoneyOperation.getValue() ) {
 			throw new Exception("Unable to complete action, Insufficient balance!");
 
@@ -92,5 +92,10 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	
 		return savingsAccountRepository.findSaldoByAccountId(accountId);
 	}
+	
+	//TO DO//
+	 /*
+	  * Generated withdraw certificate in PDF
+	   */
 
 }

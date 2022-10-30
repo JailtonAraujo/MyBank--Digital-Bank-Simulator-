@@ -1,0 +1,27 @@
+@use './app/sassvariables/variables'
+    
+*
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+  
+
+html,body
+    width: 100%
+
+main
+    min-height: 92vh
+
+.btn-primary
+    background: none
+    color: variables.$primary-color
+    border: 2px solid variables.$primary-color
+    cursor: pointer
+    font-weight: bolder
+    border-radius:5px
+    transition: 0.3s
+
+.btn-primary:hover
+    color: #000
+    background-color: variables.$primary-color
+
