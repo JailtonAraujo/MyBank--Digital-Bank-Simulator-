@@ -1,1 +1,68 @@
-<p>new-account works!</p>
+<header>
+
+</header>
+<main>
+    <div class="container-new-acount">
+
+        <div class="content-forms">
+            <mat-stepper linear #stepper>
+                <!--Stepper Terms-->
+                <mat-step [stepControl]="formTerms" [editable]="false">
+                    <form [formGroup]="formTerms" class="form-field form-terms">
+
+                        <fieldset>
+
+                            <legend>Termos do contrato</legend>
+
+                            <ng-template matStepLabel>Inicio</ng-template>
+
+                            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem molestiae eaque illum
+                                nesciunt illo ea architecto omnis maxime, voluptas numquam consequatur neque explicabo
+                                perspiciatis amet ad temporibus repudiandae, consequuntur modi? Lorem ipsum dolor sit,
+                                amet consectetur adipisicing elit. Aspernatur, eveniet quia qui cum autem libero dicta
+                                est nesciunt, eum, magnam obcaecati modi officiis dolorem nisi consequatur vitae rem
+                                fugit voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat porro,
+                                minima eaque molestias quae qui magni excepturi, reprehenderit aspernatur accusantium,
+                                itaque odio architecto facere. Vitae ad doloremque quas magnam odio.</p>
+
+                            <div class="options">
+                                <button mat-raised-button matStepperNext color="primary">Proximo</button>
+                                <mat-checkbox >Aceito os termos</mat-checkbox>
+                            </div>
+                        </fieldset>
+                    </form>
+                </mat-step>
+                <!--Stepper Terms-->
+
+                <!--Stepper Address-->
+                <mat-step [stepControl]="formTerms" [editable]="false">
+                    <form [formGroup]="formTerms" class="form-field form-terms">
+
+                        <fieldset>
+
+                            <legend>Termos do contrato</legend>
+
+                            <ng-template matStepLabel>Inicio</ng-template>
+
+                            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem molestiae eaque illum
+                                nesciunt illo ea architecto omnis maxime, voluptas numquam consequatur neque explicabo
+                                perspiciatis amet ad temporibus repudiandae, consequuntur modi? Lorem ipsum dolor sit,
+                                amet consectetur adipisicing elit. Aspernatur, eveniet quia qui cum autem libero dicta
+                                est nesciunt, eum, magnam obcaecati modi officiis dolorem nisi consequatur vitae rem
+                                fugit voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat porro,
+                                minima eaque molestias quae qui magni excepturi, reprehenderit aspernatur accusantium,
+                                itaque odio architecto facere. Vitae ad doloremque quas magnam odio.</p>
+
+                            <div class="options">
+                                <button mat-raised-button matStepperNext color="primary">Proximo</button>
+                                <mat-checkbox >Aceito os termos</mat-checkbox>
+                            </div>
+                        </fieldset>
+                    </form>
+                </mat-step>
+                <!--Stepper Address-->
+            </mat-stepper>
+        </div>
+
+    </div>
+</main>

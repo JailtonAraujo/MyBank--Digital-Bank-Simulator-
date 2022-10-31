@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewAccountComponent } from './new-account/new-account.component';
-
+import { PublicModuleModule } from 'src/app/public-module/public-module.module';
 
 
 @NgModule({
@@ -9,7 +9,8 @@ import { NewAccountComponent } from './new-account/new-account.component';
     NewAccountComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PublicModuleModule
   ],
   exports:[
     NewAccountComponent

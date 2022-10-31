@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { BrMaskerModule } from 'br-mask';
 
@@ -20,7 +22,9 @@ const AngularMaterialModules = [
   MatInputModule,
   MatIconModule,
   MatCheckboxModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatStepperModule,
+  MatFormFieldModule
 ]
 
 
@@ -33,7 +37,9 @@ const AngularMaterialModules = [
     BrMaskerModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatStepperModule,
+    MatFormFieldModule
     
   ],
   exports: [
