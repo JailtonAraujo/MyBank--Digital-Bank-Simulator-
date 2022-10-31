@@ -14,7 +14,7 @@ import com.br.mybank.Model.PhysicalPerson;
 import com.br.mybank.Service.PhysicalPersonService;
 
 @RestController
-@RequestMapping("/physicalperson")
+@RequestMapping("/physical-person")
 public class PhysicalPersonController {
 
 	@Autowired
@@ -26,7 +26,7 @@ public class PhysicalPersonController {
 		if(this.physicalPersonService.verifyIfExistsCpf(person.getCpf())) {
 			return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
 		}else {
-			return ResponseEntity.ok(person.getCpf());
+			return new ResponseEntity<String>(HttpStatus.OK);
 		}
 	}
 	

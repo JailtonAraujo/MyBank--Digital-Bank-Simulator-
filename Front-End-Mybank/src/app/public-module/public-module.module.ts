@@ -10,6 +10,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { BrMaskerModule } from 'br-mask';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
 const AngularMaterialModules = [
   MatMenuModule,
   MatButtonModule,
@@ -26,11 +30,18 @@ const AngularMaterialModules = [
   imports: [
     CommonModule,
     AngularMaterialModules,
-    BrMaskerModule
+    BrMaskerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+    
   ],
   exports: [
     AngularMaterialModules,
-    BrMaskerModule
+    BrMaskerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class PublicModuleModule { }
