@@ -5,5 +5,6 @@ export interface PhysicalPerson{
     name:string,
     lastname:string,
     cpf:string,
+    password:string,
     addressClass?:AddressModel
 }

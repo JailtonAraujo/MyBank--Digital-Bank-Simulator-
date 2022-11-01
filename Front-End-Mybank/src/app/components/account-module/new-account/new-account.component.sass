@@ -1,3 +1,6 @@
+@use '../../../sassvariables/variables'
+
+
 .container-new-acount
     color: #fff
     width: 100%
@@ -10,15 +13,20 @@
 
 .form-terms
     p
-        color: #ffa500
+        color: variables.$primary-color
         text-align: justify
     .options
         display: flex
         justify-content: space-between
         align-items: center
     mat-checkbox
-        color: #ffa500
+        color: variables.$primary-color
+.options
+    margin-top:1em 
 
 mat-label
-    color: #ffa500
+    color: variables.$primary-color
+
+::-webkit-input-placeholder
+    color: variables.$primary-color
     

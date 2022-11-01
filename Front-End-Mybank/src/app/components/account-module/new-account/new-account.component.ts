@@ -12,16 +12,18 @@ import { PhysicalPersonService } from 'src/app/services/physical-person.service'
 })
 export class NewAccountComponent implements OnInit {
 
-  constructor(
-    private addressService:AddressService,
-    private messageService:MessageService,
-    private physicalPersonService:PhysicalPersonService) { }
+  hide=true;
 
   formTerms!:FormGroup;
   formAdress!:FormGroup;
   formPerson!:FormGroup;
 
   physicalPerson!:PhysicalPerson;
+
+  constructor(
+    private addressService:AddressService,
+    private messageService:MessageService,
+    private physicalPersonService:PhysicalPersonService) { }
 
   ngOnInit(): void {
     this.formTerms =  new FormGroup({
@@ -40,7 +42,8 @@ export class NewAccountComponent implements OnInit {
       name: new FormControl('',[Validators.required]),
       lastname: new FormControl('',[Validators.required]),
       cpf: new FormControl('',[Validators.required]),
-      birthDate :new FormControl('',[Validators.required])
+      birthDate :new FormControl('',[Validators.required]),
+      password: new FormControl('',[Validators.required])
     })
 
   }
@@ -68,14 +71,35 @@ export class NewAccountComponent implements OnInit {
 
 
   public async handlerRegisterPerson(){
+
+    if(this.getAge(this.formPerson.get('birthDate')?.value) < 18 ){
+      this.messageService.addMessage('É necessario ter no minino 18 anos para abrir uma conta!','warning');
+    }
+
     this.physicalPerson = this.formPerson.value;
-    this.physicalPerson.addressClass = this.formAdress.value
+    this.physicalPerson.addressClass = this.formAdress.value;
 
     this.physicalPersonService.createdNewSavingsAccount(this.physicalPerson).subscribe((resp)=>{
       console.log(resp)
     })
 
   }
+
+
+
+  public getAge(dateString:string) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    
+    //This conditional is for verify ploblems like leap year
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    
+    return age;
+}
 
 
 }

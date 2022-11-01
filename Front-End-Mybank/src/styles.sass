@@ -55,26 +55,6 @@ button:disabled:hover
     background: none
     cursor: auto
 
-// Styles angular material
-
-.mat-stepper-horizontal,
-.mat-stepper-vertical
-    background: transparent
-
-.mat-step-text-label,
-.mat-stepper-horizontal-line
-    color: variables.$primary-color
-
-.mat-stepper-horizontal-line,
-.mat-stepper-vertical-line::before
-    background-color: variables.$primary-color
-
-.mat-form-field
-    width: 100%
-
-
-
-
 .form-field
     fieldset
         border: 1px solid variables.$primary-color
@@ -87,5 +67,38 @@ button:disabled:hover
             font-size: 1.2em
             padding: 0em 0.5em
 
+// Styles angular material
+
+.mat-stepper-horizontal,
+.mat-stepper-vertical
+    background: transparent
+
+.mat-step-text-label,
+.mat-stepper-horizontal-line,
+.mat-hint,
+.mat-icon
+    color: variables.$primary-color
+
+.mat-stepper-horizontal-line,
+.mat-stepper-vertical-line::before
+    background-color: variables.$primary-color
+
+.mat-form-field
+    width: 100%
+
+// Styles angular material
+
+
+#mat-stappervertical
+    display: none
+
+
+@media  (max-width: 460px)
+
+    #mat-stapperhorizontal
+        display: none
+
+    #mat-stappervertical
+        display: block
 
 

@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AccountModuleModule } from './components/account-module/account-module.module';
 
 import { FlashMessagesComponent } from './components/flash-messages/flash-messages.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -18,7 +19,8 @@ import { FlashMessagesComponent } from './components/flash-messages/flash-messag
     AppComponent,
     FooterComponent,
     HomeComponent,
-    FlashMessagesComponent
+    FlashMessagesComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
