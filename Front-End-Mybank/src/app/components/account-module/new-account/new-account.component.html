@@ -8,7 +8,7 @@
             <mat-stepper linear #stepper>
                 <!--Stepper Terms-->
                 <mat-step [stepControl]="formTerms" [editable]="false">
-                    <form [formGroup]="formTerms" class="form-field form-terms">
+                    <form [formGroup]="formTerms" #termsForm="ngForm" class="form-field form-terms">
 
                         <fieldset>
 
@@ -26,8 +26,8 @@
                                 itaque odio architecto facere. Vitae ad doloremque quas magnam odio.</p>
 
                             <div class="options">
-                                <button mat-raised-button matStepperNext color="primary">Proximo</button>
-                                <mat-checkbox >Aceito os termos</mat-checkbox>
+                                <button mat-raised-button matStepperNext color="primary" [disabled]="termsForm.invalid">Proximo</button>
+                                <mat-checkbox formControlName="acepteTerms" required>Aceito os termos</mat-checkbox>
                             </div>
                         </fieldset>
                     </form>
@@ -36,31 +36,94 @@
 
                 <!--Stepper Address-->
                 <mat-step [stepControl]="formTerms" [editable]="false">
-                    <form [formGroup]="formTerms" class="form-field form-terms">
+                    <ng-template matStepLabel>Endereço</ng-template>
+                    
+                    <form class="form-field"  #addressForm="ngForm" [formGroup]="formAdress">
 
                         <fieldset>
+                    
+                            <legend>Endereço</legend>
+                    
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Cep:</mat-label>
+                                <input matInput placeholder="informe o cep" formControlName="cep" required (blur)="serachAddress($event)" maxlength="8">
+                              </mat-form-field>
+                    
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Estado:</mat-label>
+                                <input matInput placeholder="informe o cep" formControlName="uf" required readonly>
+                              </mat-form-field>
+                    
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Cidade:</mat-label>
+                                <input matInput placeholder="informe o cep" formControlName="city" required readonly>
+                              </mat-form-field>
+                    
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Rua:</mat-label>
+                                <input matInput placeholder="informe o cep" formControlName="street" required>
+                              </mat-form-field>
+                    
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Numero:</mat-label>
+                                <input matInput placeholder="informe o cep" formControlName="number" required type="number">
+                              </mat-form-field>
 
-                            <legend>Termos do contrato</legend>
-
-                            <ng-template matStepLabel>Inicio</ng-template>
-
-                            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem molestiae eaque illum
-                                nesciunt illo ea architecto omnis maxime, voluptas numquam consequatur neque explicabo
-                                perspiciatis amet ad temporibus repudiandae, consequuntur modi? Lorem ipsum dolor sit,
-                                amet consectetur adipisicing elit. Aspernatur, eveniet quia qui cum autem libero dicta
-                                est nesciunt, eum, magnam obcaecati modi officiis dolorem nisi consequatur vitae rem
-                                fugit voluptatem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat porro,
-                                minima eaque molestias quae qui magni excepturi, reprehenderit aspernatur accusantium,
-                                itaque odio architecto facere. Vitae ad doloremque quas magnam odio.</p>
-
-                            <div class="options">
-                                <button mat-raised-button matStepperNext color="primary">Proximo</button>
-                                <mat-checkbox >Aceito os termos</mat-checkbox>
+                              <div class="options">
+                                <button mat-raised-button matStepperNext color="primary" [disabled]="addressForm.invalid">Proximo</button>
                             </div>
+                    
                         </fieldset>
                     </form>
+
                 </mat-step>
+
                 <!--Stepper Address-->
+
+                 <!--Stepper Person-->
+
+                <mat-step [stepControl]="formTerms" [editable]="false">
+                    <ng-template matStepLabel>Dados Pessoais</ng-template>
+                    
+                    <form class="form-field"  #addressPerson="ngForm" [formGroup]="formPerson">
+
+                        <fieldset>
+                    
+                            <legend>Dados Pessoais</legend>
+                    
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Nome:</mat-label>
+                                <input matInput placeholder="informe seu nome" formControlName="name" required>
+                              </mat-form-field>
+                    
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Sobrenome:</mat-label>
+                                <input matInput placeholder="informe seu Sobrenome" formControlName="lastname" required>
+                              </mat-form-field>
+                    
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>CPF:</mat-label>
+                                <input matInput placeholder="informe seu CPF" formControlName="cpf" required
+                                [brmasker]="{mask:'000.000.000-00',type:'num'}" maxlength="14" minlength="14">
+                              </mat-form-field>
+                    
+                              <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Data de Nascimento:</mat-label>
+                                <input matInput placeholder="informe seu CPF" formControlName="birthDate" required type="date">
+                              </mat-form-field>
+
+                              <div class="options">
+                                <button mat-raised-button matStepperNext color="primary" [disabled]="addressPerson.invalid"
+                                (click)="handlerRegisterPerson()">Finalizar</button>
+                            </div>
+                    
+                        </fieldset>
+                    </form>
+
+                </mat-step>
+
+                <!--Stepper Person-->
+
             </mat-stepper>
         </div>
 

@@ -11,6 +11,8 @@ import { AccountModuleModule } from './components/account-module/account-module.
 
 import { FlashMessagesComponent } from './components/flash-messages/flash-messages.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,8 +25,10 @@ import { FlashMessagesComponent } from './components/flash-messages/flash-messag
     AppRoutingModule,
     BrowserAnimationsModule,
     PublicModuleModule,
-    AccountModuleModule
   ],
+  exports:[
+  ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

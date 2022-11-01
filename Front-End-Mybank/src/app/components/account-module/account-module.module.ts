@@ -6,7 +6,7 @@ import { PublicModuleModule } from 'src/app/public-module/public-module.module';
 
 @NgModule({
   declarations: [
-    NewAccountComponent
+    NewAccountComponent,
   ],
   imports: [
     CommonModule,

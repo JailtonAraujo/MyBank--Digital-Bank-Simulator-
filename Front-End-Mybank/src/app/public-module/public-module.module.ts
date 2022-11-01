@@ -9,6 +9,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { BrMaskerModule } from 'br-mask';
 
@@ -24,7 +26,8 @@ const AngularMaterialModules = [
   MatCheckboxModule,
   MatSnackBarModule,
   MatStepperModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatDatepickerModule
 ]
 
 
@@ -39,7 +42,9 @@ const AngularMaterialModules = [
     ReactiveFormsModule,
     HttpClientModule,
     MatStepperModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
   ],
   exports: [
@@ -47,7 +52,9 @@ const AngularMaterialModules = [
     BrMaskerModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatNativeDateModule
+
   ]
 })
 export class PublicModuleModule { }
