@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from 'src/app/services/address.service';
 import { MessageService } from 'src/app/services/message.service';
 import { PhysicalPerson } from 'src/app/model/PhysicalPerson';
+import { PhysicalPersonService } from 'src/app/services/physical-person.service';
 
 @Component({
   selector: 'app-new-account',
@@ -13,7 +14,8 @@ export class NewAccountComponent implements OnInit {
 
   constructor(
     private addressService:AddressService,
-    private messageService:MessageService) { }
+    private messageService:MessageService,
+    private physicalPersonService:PhysicalPersonService) { }
 
   formTerms!:FormGroup;
   formAdress!:FormGroup;
@@ -65,11 +67,14 @@ export class NewAccountComponent implements OnInit {
   }
 
 
-  public handlerRegisterPerson(){
+  public async handlerRegisterPerson(){
     this.physicalPerson = this.formPerson.value;
     this.physicalPerson.addressClass = this.formAdress.value
 
-    console.log(this.physicalPerson)
+    this.physicalPersonService.createdNewSavingsAccount(this.physicalPerson).subscribe((resp)=>{
+      console.log(resp)
+    })
+
   }
 
 

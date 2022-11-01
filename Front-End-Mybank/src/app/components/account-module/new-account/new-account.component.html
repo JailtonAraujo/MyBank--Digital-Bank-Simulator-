@@ -5,7 +5,7 @@
     <div class="container-new-acount">
 
         <div class="content-forms">
-            <mat-stepper linear #stepper>
+             <mat-stepper linear #stepper >  <!--orientation="vertical" -->
                 <!--Stepper Terms-->
                 <mat-step [stepControl]="formTerms" [editable]="false">
                     <form [formGroup]="formTerms" #termsForm="ngForm" class="form-field form-terms">
