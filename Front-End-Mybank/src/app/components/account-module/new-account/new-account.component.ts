@@ -6,6 +6,7 @@ import { PhysicalPerson } from 'src/app/model/PhysicalPerson';
 import { PhysicalPersonService } from 'src/app/services/physical-person.service';
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-new-account',
@@ -27,7 +28,8 @@ export class NewAccountComponent implements OnInit {
     private messageService:MessageService,
     private physicalPersonService:PhysicalPersonService,
     private savingsAccountService:SavingsAccountService,
-    private router:Router) { }
+    private router:Router,
+    private loadingService:LoadingService) { }
 
   ngOnInit(): void {
     this.formTerms =  new FormGroup({
@@ -52,13 +54,13 @@ export class NewAccountComponent implements OnInit {
 
   }
 
-  public async serachAddress(event: Event) {
+  public serachAddress(event: Event) {
     const value = (event.target as HTMLInputElement).value;
 
     this.formAdress.get("uf")?.setValue("...");
     this.formAdress.get("city")?.setValue("...");
 
-    await this.addressService.searchAddress(value).subscribe((data) => {
+      this.addressService.searchAddress(value).subscribe((data) => {
       this.formAdress.get("uf")?.setValue(data.uf);
       this.formAdress.get("city")?.setValue(data.localidade);
       
@@ -84,16 +86,18 @@ export class NewAccountComponent implements OnInit {
     this.physicalPerson = this.formPerson.value;
     this.physicalPerson.addressClass = this.formAdress.value;
 
+    this.loadingService.isLoading(true);
+
     this.physicalPersonService.createdNewSavingsAccount(this.physicalPerson).subscribe((resp)=>{
-  
-      console.log(resp)
 
       this.savingsAccountService.setAccountModel(resp);
+      this.loadingService.isLoading(false);
 
       this.router.navigate(['account-created']);
 
     },error =>{
       this.messageService.addMessage(`${error.message}`,'error');
+      this.loadingService.isLoading(false);
     })
 
   }
