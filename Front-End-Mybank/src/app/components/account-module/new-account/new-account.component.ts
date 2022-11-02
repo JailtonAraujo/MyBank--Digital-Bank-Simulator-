@@ -16,6 +16,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class NewAccountComponent implements OnInit {
 
   hide=true;
+  OrientacionStteper:any;
 
   formTerms!:FormGroup;
   formAdress!:FormGroup;
@@ -32,6 +33,14 @@ export class NewAccountComponent implements OnInit {
     private loadingService:LoadingService) { }
 
   ngOnInit(): void {
+
+    const mainLement = document.getElementsByTagName('main')[0];
+
+    this.OrientacionStteper = mainLement.clientWidth < 460 ? 'vertical' : 'horizontal'
+ 
+    let div = document.getElementsByTagName('body')[0];
+    console.log(div!.clientWidth)
+
     this.formTerms =  new FormGroup({
       acepteTerms : new FormControl('',[Validators.required])
     });
@@ -118,5 +127,12 @@ export class NewAccountComponent implements OnInit {
     return age;
 }
 
+  resizeView(event:any){
+
+    let width = event.target.innerWidth;
+
+    this.OrientacionStteper = width < 460 ? 'vertical' : 'horizontal';
+    
+  }
 
 }
