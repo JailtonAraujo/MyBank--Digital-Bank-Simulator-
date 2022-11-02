@@ -4,6 +4,8 @@ import { AddressService } from 'src/app/services/address.service';
 import { MessageService } from 'src/app/services/message.service';
 import { PhysicalPerson } from 'src/app/model/PhysicalPerson';
 import { PhysicalPersonService } from 'src/app/services/physical-person.service';
+import { SavingsAccountService } from 'src/app/services/savings-account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-account',
@@ -23,7 +25,9 @@ export class NewAccountComponent implements OnInit {
   constructor(
     private addressService:AddressService,
     private messageService:MessageService,
-    private physicalPersonService:PhysicalPersonService) { }
+    private physicalPersonService:PhysicalPersonService,
+    private savingsAccountService:SavingsAccountService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.formTerms =  new FormGroup({
@@ -80,7 +84,13 @@ export class NewAccountComponent implements OnInit {
     this.physicalPerson.addressClass = this.formAdress.value;
 
     this.physicalPersonService.createdNewSavingsAccount(this.physicalPerson).subscribe((resp)=>{
-      console.log(resp)
+  
+      this.savingsAccountService.setAccountModel(resp);
+
+      this.router.navigate(['account-created']);
+
+    },error =>{
+      this.messageService.addMessage(`${error.message}`,'error');
     })
 
   }

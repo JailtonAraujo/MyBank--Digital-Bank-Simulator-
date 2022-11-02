@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.mybank.DTO.AccountDTO;
 import com.br.mybank.Model.PhysicalPerson;
 import com.br.mybank.Service.PhysicalPersonService;
 
@@ -31,12 +32,15 @@ public class PhysicalPersonController {
 	}
 	
 	@PostMapping(value="/savings-account")
-	public ResponseEntity<PhysicalPerson> registerNewPersonAndSavingsAccount(@RequestBody PhysicalPerson physicalPerson ) throws SQLIntegrityConstraintViolationException{
+	public ResponseEntity<AccountDTO> registerNewPersonAndSavingsAccount(@RequestBody PhysicalPerson physicalPerson ) throws SQLIntegrityConstraintViolationException{
 		
 		if(this.physicalPersonService.verifyIfExistsCpf(physicalPerson.getCpf())) {
 			throw new SQLIntegrityConstraintViolationException("CPF already exists!");
 		}else {
-			return ResponseEntity.ok(this.physicalPersonService.registerNewPerson(physicalPerson));
+			
+			AccountDTO accountDTO = new AccountDTO(this.physicalPersonService.registerNewPerson(physicalPerson).getAccount());
+			
+			return ResponseEntity.ok(accountDTO);
 		}
 	}
 	

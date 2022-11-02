@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { SavingsAccount } from '../model/SavingsAccount';
 import { PhysicalPerson } from '../model/PhysicalPerson';
 
 @Injectable({
@@ -17,6 +18,6 @@ export class PhysicalPersonService {
   }
 
   public createdNewSavingsAccount(physicalPerson:PhysicalPerson){
-    return this.http.post(`${this.urlBaseApiPhysicalPerson}/savings-account`,physicalPerson);
+    return this.http.post<SavingsAccount>(`${this.urlBaseApiPhysicalPerson}/savings-account`,physicalPerson);
   }
 }

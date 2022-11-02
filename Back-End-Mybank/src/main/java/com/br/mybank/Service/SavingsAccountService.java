@@ -14,4 +14,7 @@ public interface SavingsAccountService {
 	public void whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) throws Exception;
 	
 	public Double findSaldoByAccountId(Long accountId);
+	
+	//Generate certificate of account created
+	public String generateSavingsAccountCertificate(Long accountId);
 }

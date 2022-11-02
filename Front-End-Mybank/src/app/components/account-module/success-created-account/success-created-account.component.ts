@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PhysicalAccount } from 'src/app/model/PhysicalAccount';
+import { Router } from '@angular/router';
+import { SavingsAccount } from 'src/app/model/SavingsAccount';
+import { SavingsAccountService } from 'src/app/services/savings-account.service';
 
 @Component({
   selector: 'app-success-created-account',
@@ -8,11 +10,19 @@ import { PhysicalAccount } from 'src/app/model/PhysicalAccount';
 })
 export class SuccessCreatedAccountComponent implements OnInit {
 
-  physicalAccount!:PhysicalAccount;
+  account!:SavingsAccount;
 
-  constructor() { }
+  constructor(private savingsAccountService:SavingsAccountService,
+    private router:Router) { }
 
   ngOnInit(): void {
+
+    if(!this.account){
+      this.router.navigate(['']);
+    }
+
+    this.account = this.savingsAccountService.getAccountModel();
+   
   }
 
 }

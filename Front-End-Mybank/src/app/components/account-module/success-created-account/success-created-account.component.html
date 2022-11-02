@@ -1,11 +1,11 @@
 <main>
 <div class="container">
-    <div class="success-content">
+    <div class="success-content" *ngIf="account">
         <h1>Conta criada com sucesso!</h1>
-        <p>Agência: 1308</p>
-        <p>Conta: 4545645</p>
-        <p>Digito: 8</p>
-        <p>Data da abertura: 12/10/2022</p>
+        <p>Agência: {{account.agencia}}</p>
+        <p>Conta: {{account.conta}}</p>
+        <p>Digito: {{account.digito}}</p>
+        <p>Data da abertura: {{account.dataAbertura}}</p>
         <div class="btns">
             <button mat-raised-button color="accent" >Imprimir conprovante</button>
             <a mat-raised-button color="primary" routerLink=""  >Continuar</a>

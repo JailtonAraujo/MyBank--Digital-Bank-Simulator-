@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PhysicalAccountService } from './physical-account.service';
+import { SavingsAccountService } from './savings-account.service';
 
 describe('PhysicalAccountService', () => {
-  let service: PhysicalAccountService;
+  let service: SavingsAccountService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PhysicalAccountService);
+    service = TestBed.inject(SavingsAccountService);
   });
 
   it('should be created', () => {

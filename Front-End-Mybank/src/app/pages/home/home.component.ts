@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
 import { PhysicalPersonService } from 'src/app/services/physical-person.service';
 
@@ -20,7 +21,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private physicalPersonService: PhysicalPersonService) { }
+    private physicalPersonService: PhysicalPersonService,
+    private router:Router,
+   ) { }
 
   ngOnInit(): void {
     this.brMaskProps = { mask: '000.000.000-00', len: 14, type: 'num' };
@@ -36,6 +39,7 @@ export class HomeComponent implements OnInit {
     this.personModel.cpfOrCnpj = '';
   }
 
+  //Check if already CPF or CNPJ
   public submitFormVerifyCpfOrCnpj() {
     if (this.chackBoxActiveted === true) {
       this.messageService.addMessage('Opções de conta juridica estão em manutenção!', 'warning');
@@ -44,7 +48,9 @@ export class HomeComponent implements OnInit {
 
     this.physicalPersonService.verifyIfExistsCpf(this.personModel.cpfOrCnpj).subscribe((resp) => {
 
-      this.messageService.addMessage('OK','success');
+      this.router.navigate(['new-account']);
+
+      // this.messageService.addMessage('OK','success');
 
     }, error => {
       error.status == 406 ? this.messageService.addMessage('CPF já existente!', 'error') : this.messageService.addMessage('Opps...Ocorreu um erro inesperado, tente mais tarde', 'error')

@@ -27,6 +27,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     PublicModuleModule,
+    AccountModuleModule
   ],
   exports:[
   ],

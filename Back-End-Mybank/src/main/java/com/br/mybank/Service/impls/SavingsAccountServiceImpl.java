@@ -2,16 +2,23 @@ package com.br.mybank.Service.impls;
 
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.br.mybank.DTO.AccountReportDTO;
 import com.br.mybank.Model.Account;
 import com.br.mybank.Model.SavingsAccount;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
 import com.br.mybank.Repository.SavingsAccountRepository;
 import com.br.mybank.Repository.WithdrawRepository;
+import com.br.mybank.Service.ReportUtil;
 import com.br.mybank.Service.SavingsAccountService;
+
+import net.sf.jasperreports.engine.JRException;
 
 @Service
 public class SavingsAccountServiceImpl implements SavingsAccountService {
@@ -22,6 +29,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	
 	@Autowired
 	protected WithdrawRepository withdrawRepository;
+	
+	@Autowired
+	protected ReportUtil reportUtil;
 	
 	Random random = new Random();
 
@@ -92,10 +102,28 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	
 		return savingsAccountRepository.findSaldoByAccountId(accountId);
 	}
-	
-	//TO DO//
-	 /*
-	  * Generated withdraw certificate in PDF
-	   */
+
+	@Override
+	public String generateSavingsAccountCertificate(Long accountId) {
+		
+		List<AccountReportDTO> dtos = new ArrayList<AccountReportDTO>();
+		
+		AccountReportDTO dto = new AccountReportDTO(savingsAccountRepository.findById(accountId).get());
+		
+		dtos.add(dto);
+		
+		try {
+			String certificateBase64 = "data:application/pdf;base64," + Base64.encodeBase64String(
+					reportUtil.generatedReport(dtos, "report_created_account")
+					);
+			
+			return certificateBase64;
+			
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 }
