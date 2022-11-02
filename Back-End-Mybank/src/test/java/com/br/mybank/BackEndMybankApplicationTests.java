@@ -1,11 +1,14 @@
 package com.br.mybank;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.br.mybank.DTO.AccountDTO;
 import com.br.mybank.DTO.AccountReportDTO;
+import com.br.mybank.Model.AddressClass;
 import com.br.mybank.Model.PhysicalPerson;
 import com.br.mybank.Model.SavingsAccount;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
@@ -59,6 +62,37 @@ class BackEndMybankApplicationTests {
 		AccountReportDTO dto = new AccountReportDTO(savingsAccount);
 		
 		System.out.println(dto);
+	}
+	
+	
+	@Test
+	void damiDateAccoutn() throws InterruptedException {
+		
+		for(int i = 1;i<=10;i++) {
+		
+		Random random = new Random();
+		int cpf = random.nextInt(9999999);
+		
+		PhysicalPerson person = new PhysicalPerson();
+		person.setCpf(Integer.toString(cpf));
+		person.setName("jasdjhjf");
+		person.setLastname("asdfdsaf");
+		
+//		AddressClass addressClass = new AddressClass();
+//		
+//		addressClass.setCep("4880000");
+//		addressClass.setCity("fsdf");
+//		addressClass.setNumber(45);
+//		addressClass.setStreet("fsdfsdf");
+//		addressClass.setUf("BA");
+//		addressClass.setPerson(person);
+		
+		
+		personService.registerNewPerson(person);
+		
+		Thread.sleep(2000);
+		}
+		
 	}
 
 }

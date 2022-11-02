@@ -1,13 +1,13 @@
 <main>
-<div class="container">
-    <div class="success-content" *ngIf="account">
+<div class="container" >
+    <div class="success-content"*ngIf="account">
         <h1>Conta criada com sucesso!</h1>
         <p>Agência: {{account.agencia}}</p>
         <p>Conta: {{account.conta}}</p>
         <p>Digito: {{account.digito}}</p>
         <p>Data da abertura: {{account.dataAbertura}}</p>
         <div class="btns">
-            <button mat-raised-button color="accent" >Imprimir conprovante</button>
+            <button mat-raised-button color="accent" (click)="printCreateAccountCertificate()" >Imprimir conprovante</button>
             <a mat-raised-button color="primary" routerLink=""  >Continuar</a>
         </div>
     </div>

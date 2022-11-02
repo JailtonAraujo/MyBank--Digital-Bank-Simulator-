@@ -12,6 +12,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { BrMaskerModule } from 'br-mask';
 
@@ -29,7 +30,8 @@ const AngularMaterialModules = [
   MatStepperModule,
   MatFormFieldModule,
   MatDatepickerModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatDialogModule
 ]
 
 
@@ -43,11 +45,8 @@ const AngularMaterialModules = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
     MatNativeDateModule,
-    MatProgressSpinnerModule
+  
     
   ],
   exports: [

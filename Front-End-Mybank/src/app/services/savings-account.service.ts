@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { SavingsAccount } from '../model/SavingsAccount';
 
@@ -8,11 +9,17 @@ import { SavingsAccount } from '../model/SavingsAccount';
 })
 export class SavingsAccountService {
 
-  UrlBaseApi = `${environment.UrlBaseApi}/physical-account`;
+  UrlBaseApi = `${environment.UrlBaseApi}/savings-account`;
 
   private AccountModel!:SavingsAccount;
 
   constructor(private http:HttpClient) { }
+
+
+  public printCreatedAccountCertificate(id:number):Observable<any>{
+    return this.http.get(`${this.UrlBaseApi}/certificate-creted/${id}`,{responseType:'text'});
+  }
+
 
   public setAccountModel(accountModel:SavingsAccount){
     this.AccountModel = accountModel;

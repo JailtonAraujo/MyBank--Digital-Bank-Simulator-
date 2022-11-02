@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(initialValue = 1, name = "seq_account_id")
+@SequenceGenerator(initialValue = 1, name = "seq_account_id",allocationSize = 1)
 @Entity
 public abstract class Account implements Serializable{
 	

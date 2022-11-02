@@ -31,7 +31,7 @@ public class SavingsAccountController {
 	}
 	
 	@GetMapping(value="/certificate-creted/{id}",produces = "application/text")
-	public ResponseEntity<String> generateSavingAccountCertificate( @PathVariable(name = "id") Long accountId ){
+	public ResponseEntity<String> generateSavingAccountCertificate( @PathVariable(name = "id") Long accountId ) throws InterruptedException{
 		
 		return ResponseEntity.ok(this.savingsAccountService.generateSavingsAccountCertificate(accountId));
 		

@@ -78,6 +78,7 @@ export class NewAccountComponent implements OnInit {
 
     if(this.getAge(this.formPerson.get('birthDate')?.value) < 18 ){
       this.messageService.addMessage('É necessario ter no minino 18 anos para abrir uma conta!','warning');
+      return;
     }
 
     this.physicalPerson = this.formPerson.value;
@@ -85,6 +86,8 @@ export class NewAccountComponent implements OnInit {
 
     this.physicalPersonService.createdNewSavingsAccount(this.physicalPerson).subscribe((resp)=>{
   
+      console.log(resp)
+
       this.savingsAccountService.setAccountModel(resp);
 
       this.router.navigate(['account-created']);

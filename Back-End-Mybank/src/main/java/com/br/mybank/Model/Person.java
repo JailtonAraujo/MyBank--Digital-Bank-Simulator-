@@ -18,7 +18,7 @@ import lombok.Data;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(initialValue = 1, name = "seq_person_id")
+@SequenceGenerator(initialValue = 1, name = "seq_person_id",allocationSize = 1)
 public abstract class Person implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
