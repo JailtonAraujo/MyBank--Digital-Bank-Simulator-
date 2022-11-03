@@ -17,4 +17,6 @@ public interface SavingsAccountService {
 	
 	//Generate certificate of account created
 	public String generateSavingsAccountCertificate(Long accountId);
+	
+	public Boolean verifyIfExistsAccount(Account account);
 }

@@ -1,0 +1,43 @@
+<main>
+    <div class="container-form-auth">
+        <form class="form-field" [formGroup]="formAccount" #accountForm="ngForm" (submit)="authenticate()">
+
+            <fieldset>
+
+                <legend>Autentique-se</legend>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Agência:</mat-label>
+                    <input matInput required readonly formControlName="agencia">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Conta:</mat-label>
+                    <input matInput required readonly formControlName="conta">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Digito:</mat-label>
+                    <input matInput required readonly formControlName="digito">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Senha:</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" required minlength="8"
+                        formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-hint align="start">*No minimo 8 caracters</mat-hint>
+                </mat-form-field>
+
+
+                <div class="options">
+                    <button mat-raised-button color="primary" [disabled]="accountForm.invalid">Logar</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</main>

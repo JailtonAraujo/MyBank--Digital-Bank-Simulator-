@@ -126,4 +126,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		return null;
 	}
 
+	@Override
+	public Boolean verifyIfExistsAccount(Account account) {
+		return savingsAccountRepository.verifyIfExistsAccount(account.getAgencia(), account.getConta(), account.getDigito());
+	}
+
 }

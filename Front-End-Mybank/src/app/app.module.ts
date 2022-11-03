@@ -12,6 +12,7 @@ import { AccountModuleModule } from './components/account-module/account-module.
 import { FlashMessagesComponent } from './components/flash-messages/flash-messages.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
+import { AuthFormComponent } from './pages/auth-form/auth-form.component';
 
 
 
@@ -22,7 +23,8 @@ import { ReportDialogComponent } from './components/report-dialog/report-dialog.
     HomeComponent,
     FlashMessagesComponent,
     LoadingComponent,
-    ReportDialogComponent
+    ReportDialogComponent,
+    AuthFormComponent
   ],
   imports: [
     BrowserModule,

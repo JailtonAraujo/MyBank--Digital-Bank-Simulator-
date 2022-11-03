@@ -1,0 +1,58 @@
+@use '../../../sassvariables/variables'
+    
+main
+    background-color: #000000de
+    min-height: 90vh
+
+
+.content-advertising
+    padding-top: 3em
+    width: 100%
+
+
+h1
+    text-align: center
+    color: variables.$primary-color
+    text-decoration: underline
+    text-transform: uppercase
+    font-weight: bold
+
+
+.row
+    width: 100%
+    color: variables.$primary-color
+    font-weight: bold
+    text-align: center
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+
+
+.row ul
+    display: flex
+    flex-wrap: wrap
+    list-style: none
+    justify-content: center
+    width: 100%
+
+
+.card
+    height: 12em
+    width: 17em
+    border: 2px solid variables.$primary-color
+    margin: 1.3em 3em 
+    border-radius: 5px 
+    cursor: pointer
+    
+    transition: 0.3s
+
+
+.card:hover
+    transform: scale(1.05, 1.05)
+    box-shadow: 0 0 2em variables.$primary-color
+
+
+legend
+    padding: 0em 0.2em
+    font-size: 1.2em
+    font-weight: bold

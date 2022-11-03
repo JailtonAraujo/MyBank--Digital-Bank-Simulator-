@@ -16,10 +16,13 @@ export class SavingsAccountService {
   constructor(private http:HttpClient) { }
 
 
-  public printCreatedAccountCertificate(id:number):Observable<any>{
+  public printCreatedAccountCertificate(id:number){
     return this.http.get(`${this.UrlBaseApi}/certificate-creted/${id}`,{responseType:'text'});
   }
 
+  public verifyIfExistsSavingsAccount(account:SavingsAccount){
+    return this.http.post(`${this.UrlBaseApi}/exists-account`,account);
+  }
 
   public setAccountModel(accountModel:SavingsAccount){
     this.AccountModel = accountModel;

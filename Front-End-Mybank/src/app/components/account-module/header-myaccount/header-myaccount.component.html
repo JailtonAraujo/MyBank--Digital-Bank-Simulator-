@@ -1,0 +1,22 @@
+<header>
+    <nav class="nav-bar">
+        <div class="self-menu">
+            <h1>dfdsf</h1>
+        </div>
+        <ul class="account-menu">
+            <li class="options-account">
+
+                <div class="balance-info">
+                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </div>
+            </li>
+            <!-- <li class="actions">
+
+            </li> -->
+        </ul>
+    </nav>
+</header>

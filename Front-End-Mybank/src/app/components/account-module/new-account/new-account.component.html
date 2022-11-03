@@ -5,7 +5,7 @@
     <div class="container-new-acount">
 
         <div class="content-forms" id="divtest">
-             <mat-stepper linear #stepper [orientation]="OrientacionStteper" id="mat-stapperhorizontal" h>  <!--orientation="vertical" -->
+             <mat-stepper linear #stepper [orientation]="OrientacionStteper" id="mat-stapperhorizontal" h> 
 
                 <!--Stepper Terms-->
                 <mat-step [stepControl]="formTerms" [editable]="false">
@@ -36,7 +36,7 @@
                 <!--Stepper Terms-->
 
                 <!--Stepper Address-->
-                <mat-step [stepControl]="formTerms" [editable]="false">
+                <mat-step [stepControl]="formAdress" [editable]="false">
                     <ng-template matStepLabel>Endereço</ng-template>
                     
                     <form class="form-field"  #addressForm="ngForm" [formGroup]="formAdress">
@@ -83,7 +83,7 @@
 
                  <!--Stepper Person-->
 
-                <mat-step [stepControl]="formTerms" [editable]="false">
+                <mat-step [stepControl]="formPerson" [editable]="false">
                     <ng-template matStepLabel>Dados Pessoais</ng-template>
                     
                     <form class="form-field"  #addressPerson="ngForm" [formGroup]="formPerson">
@@ -111,7 +111,7 @@
                               <mat-form-field class="example-full-width" appearance="fill">
                                 <mat-label>Data de Nascimento:</mat-label>
                                 <input matInput placeholder="informe seu CPF" formControlName="birthDate" required type="date">
-                                <mat-hint align="start">No minimo 18 anos</mat-hint>
+                                <mat-hint align="start">*No minimo 18 anos</mat-hint>
                               </mat-form-field>
 
                               <mat-form-field appearance="fill">
@@ -120,7 +120,7 @@
                                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
-                                <mat-hint align="start">No minimo 8 caracters</mat-hint>
+                                <mat-hint align="start">*No minimo 8 caracters</mat-hint>
                               </mat-form-field>
 
 
@@ -137,10 +137,6 @@
                 <!--Stepper Person-->
 
             </mat-stepper>
-
-
-
-            <!-- Mat-stepper-Vertical-->
 
           
 

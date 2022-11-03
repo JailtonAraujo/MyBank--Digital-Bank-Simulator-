@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.mybank.Model.Account;
 import com.br.mybank.Model.SavingsAccount;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
 import com.br.mybank.Service.SavingsAccountService;
@@ -35,6 +36,16 @@ public class SavingsAccountController {
 		
 		return ResponseEntity.ok(this.savingsAccountService.generateSavingsAccountCertificate(accountId));
 		
+	}
+	
+	@PostMapping("/exists-account")
+	public ResponseEntity<Boolean> verifyIfExistsAccount( @RequestBody SavingsAccount account){
+		if(this.savingsAccountService.verifyIfExistsAccount(account)) {
+			return ResponseEntity.ok(true);
+		}
+		return new ResponseEntity<Boolean>(false,HttpStatus.NOT_FOUND);
+		
+
 	}
 	
 }
