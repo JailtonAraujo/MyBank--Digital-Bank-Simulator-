@@ -1,22 +1,56 @@
 <header>
     <nav class="nav-bar">
         <div class="self-menu">
-            <h1>dfdsf</h1>
+            <button mat-button color="accent" mat-button [matMenuTriggerFor]="selfmenu">Olá, Jailton</button>
+            <mat-menu #selfmenu="matMenu">
+                <button mat-menu-item color="warn" id="btn-sair">Sair</button>
+                <a href="#" mat-menu-item id="btn-inicio">Inicio</a>
+            </mat-menu>
         </div>
         <ul class="account-menu">
+            <li class="actions">
+                <button mat-raised-button color="accent" [matMenuTriggerFor]="beforeMenu">Serviços</button>
+                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                    <button mat-menu-item>Sacar</button>
+                    <button mat-menu-item>Traferência</button>
+                    <button mat-menu-item>Histório</button>
+                </mat-menu>
+            </li>
             <li class="options-account">
 
                 <div class="balance-info">
-                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <input matInput [type]="hide ? 'password' : 'text'" value="R$1000" readonly>
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </div>
-            </li>
-            <!-- <li class="actions">
 
-            </li> -->
+            </li>
         </ul>
+    </nav>
+
+    <nav class="mobile-menu">
+        <div class="btn-bars">
+        <button mat-icon-button aria-label="Example icon-button with a menu" (click)="openAndCloseMenu()">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <div class="balance-info">
+            <input matInput [type]="hide ? 'password' : 'text'" value="R$1000" readonly>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </div>
+        </div>
+        <fieldset class="options-mobile">
+            <legend>Ola,Jailton</legend>
+        <ul [classList]="classList">
+            <li>Sacar</li>
+            <li>Transferir</li>
+            <li>Histórico</li>
+            <li>Sair</li>
+        </ul>
+    </fieldset>
     </nav>
 </header>

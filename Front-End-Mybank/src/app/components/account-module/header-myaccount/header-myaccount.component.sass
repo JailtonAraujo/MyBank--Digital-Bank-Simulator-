@@ -1,8 +1,5 @@
 @use '../../../sassvariables/variables'
 
-*
-    color: variables.$primary-color
-
 h1
     margin: 0
 
@@ -39,6 +36,58 @@ header
         display: flex
         justify-content: center
         align-items: center
+
+.account-menu
+    display: flex
+    align-items: center
+    gap: 1em
+
+.self-menu
+    button,a
+        font-size: 1.2em
+        font-weight: bold
+
+.mobile-menu
+    widows: 100%
+    display: none
+    flex-direction: column
+    .btn-bars
+        display: flex
+        justify-content: space-between
+        padding: 0.5em 0.6em
+    .options-mobile
+        *
+            color: variables.$primary-color
+        padding: 0.2em 0.6em
+        border: none
+        border-top: 1px solid  variables.$primary-color
+        legend
+            text-align: center
+            font-size: 1.3em
+            padding: 0em 0.2em
+            color: #ff4081
+        li
+            list-style: none
+            padding: 0.2em 0em
+            text-decoration: underline
+            font-size: 1.2em
+
+.links
+    display: none
+    transition: 0.3s
+
+.open
+    display: block
+
+
+@media(max-width: 500px)
+    .nav-bar
+        display: none
+    .mobile-menu
+        display: flex
+
+
+        
 
 
 
