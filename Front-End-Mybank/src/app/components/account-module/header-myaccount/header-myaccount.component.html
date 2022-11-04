@@ -1,17 +1,17 @@
 <header>
     <nav class="nav-bar">
         <div class="self-menu">
-            <button mat-button color="accent" mat-button [matMenuTriggerFor]="selfmenu">Olá, Jailton</button>
+            <button mat-button color="accent" mat-button [matMenuTriggerFor]="selfmenu">➤ Olá, Jailton</button>
             <mat-menu #selfmenu="matMenu">
-                <button mat-menu-item color="warn" id="btn-sair">Sair</button>
-                <a href="#" mat-menu-item id="btn-inicio">Inicio</a>
+                <a routerLink="/" mat-menu-item color="warn" id="btn-sair">Sair</a>
+                <a routerLink="/myaccount" mat-menu-item id="btn-inicio">Inicio</a>
             </mat-menu>
         </div>
         <ul class="account-menu">
             <li class="actions">
                 <button mat-raised-button color="accent" [matMenuTriggerFor]="beforeMenu">Serviços</button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before">
-                    <button mat-menu-item>Sacar</button>
+                    <a routerLink="withdraw" mat-menu-item>Sacar</a>
                     <button mat-menu-item>Traferência</button>
                     <button mat-menu-item>Histório</button>
                 </mat-menu>
@@ -46,9 +46,10 @@
         <fieldset class="options-mobile">
             <legend>Ola,Jailton</legend>
         <ul [classList]="classList">
-            <li>Sacar</li>
+            <li><a routerLink="withdraw">Sacar</a></li>
             <li>Transferir</li>
             <li>Histórico</li>
+            <li><a routerLink="/myaccount">Inicio</a></li>
             <li>Sair</li>
         </ul>
     </fieldset>

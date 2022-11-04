@@ -1,0 +1,25 @@
+<main>
+    <div class="container-withdraw">
+        <form  [formGroup]="formWithdraw" #withdrawForm="ngForm" class="form-field form-terms" (submit)="confirmWithdraw()">
+
+            <fieldset>
+
+                <legend>Sacar Dinheiro</legend>
+
+                <mat-form-field appearance="fill">
+                    <input matInput [brmasker]="{money: true,  decimalCaracter: '.', decimal:2}" 
+                    maxlength="8" minlength="4" placeholder="Valor a Sacar..." formControlName="value" required>
+                    <span matPrefix>R$&nbsp;</span>
+                  </mat-form-field>
+
+                <p> <u><b>*Atenção*</b></u> Confira todos as informações, uma vez confirmada a operação não será possivel
+                    desfaze-la ou recuperar o saldo!</p>
+
+                <div class="options">
+                    <button mat-raised-button color="primary" [disabled]="withdrawForm.invalid" type="submit">Confirmar</button>
+                    <mat-checkbox required formControlName="terms">Confirmo operação</mat-checkbox>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</main>

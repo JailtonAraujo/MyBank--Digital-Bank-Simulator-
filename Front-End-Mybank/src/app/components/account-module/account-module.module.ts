@@ -7,6 +7,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AdsRowComponent } from './ads-row/ads-row.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { HeaderMyaccountComponent } from './header-myaccount/header-myaccount.component';
+import { WithdrawMoneyComponentComponent } from './withdraw-money-component/withdraw-money-component.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { HeaderMyaccountComponent } from './header-myaccount/header-myaccount.co
     AdsRowComponent,
     MyAccountComponent,
     HeaderMyaccountComponent,
+    WithdrawMoneyComponentComponent,
   ],
   imports: [
     CommonModule,
