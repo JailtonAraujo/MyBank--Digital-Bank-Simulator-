@@ -19,17 +19,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(initialValue = 1, name = "seq_account_id",allocationSize = 1)
+
+@Inheritance(strategy = InheritanceType.JOINED)
+//@SequenceGenerator(initialValue = 1, name = "seq_account_id",allocationSize = 1)
 @Entity
-public abstract class Account implements Serializable{
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Account implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_account_id")
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private int agencia;

@@ -1,5 +1,6 @@
 package com.br.mybank.Controller;
 
+import com.br.mybank.DTO.WithdrawDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +24,11 @@ public class SavingsAccountController {
 	protected SavingsAccountService savingsAccountService;
 	
 	@PostMapping("/withdraw-money")
-	public ResponseEntity<SavingsAccount> whithdrawMoney (@RequestBody WithdrawMoneyOperation withdrawMoneyOperation) throws Exception {
+	public ResponseEntity<WithdrawDTO> whithdrawMoney (@RequestBody WithdrawMoneyOperation withdrawMoneyOperation) throws Exception {
 	
-		this.savingsAccountService.whithdrawMoney(withdrawMoneyOperation);
+		WithdrawDTO  dto = new WithdrawDTO(this.savingsAccountService.whithdrawMoney(withdrawMoneyOperation));
 		
-		return new ResponseEntity<SavingsAccount>(HttpStatus.OK);
+		return ResponseEntity.ok(dto);
 		
 	}
 	

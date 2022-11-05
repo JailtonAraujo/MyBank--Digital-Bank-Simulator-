@@ -52,7 +52,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		}
 
 		// build a model savings account
-		SavingsAccount savingsAccount = new SavingsAccount().builder().saldo(1000.00).taxaJuros_per_month((float) 0.5)
+		SavingsAccount savingsAccount = new SavingsAccount().builder().taxaJuros_per_month((float) 0.5).saldo(1000.0)
 				.build();
 		savingsAccount.setAgencia(account.getAgencia());
 		savingsAccount.setConta(account.getConta());
@@ -78,9 +78,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	}
 
 	@Override
-	public void whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) throws Exception  {
+	public WithdrawMoneyOperation whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) throws Exception  {
 		
-		Double currentSaldo = findSaldoByAccountId(withdrawMoneyOperation.getAccountId());
+		Double currentSaldo = findSaldoByAccountId(withdrawMoneyOperation.getAccount().getId());
 		
 		
 		//Verify if account balance is enough for complete the withdraw// 
@@ -88,9 +88,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 			throw new Exception("Unable to complete action, Insufficient balance!");
 
 		}else {
-			savingsAccountRepository.withDrawMoney((currentSaldo - withdrawMoneyOperation.getValue()), withdrawMoneyOperation.getAccountId());
+			savingsAccountRepository.withDrawMoney((currentSaldo - withdrawMoneyOperation.getValue()), withdrawMoneyOperation.getAccount().getId());
 			withdrawMoneyOperation.setDate(LocalDate.now());
-			withdrawRepository.save(withdrawMoneyOperation);
+			return withdrawRepository.save(withdrawMoneyOperation);
 		}
 		
 	}

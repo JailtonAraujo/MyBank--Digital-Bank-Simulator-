@@ -1,7 +1,5 @@
-export interface SavingsAccount{
-    id?:number,
-    agencia:string,
-    conta:string,
-    digito:string
-    dataAbertura:Date
+import { Account } from "./Account"
+
+export class SavingsAccount extends Account{
+    saldo?:number
 }

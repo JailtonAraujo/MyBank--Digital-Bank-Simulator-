@@ -48,9 +48,9 @@ class BackEndMybankApplicationTests {
 	@Test
 	void testWithdrawOperation() throws Exception {
 		
-		WithdrawMoneyOperation moneyOperation = new WithdrawMoneyOperation().builder().accountId(1L).value(2000.00).build();
+		//WithdrawMoneyOperation moneyOperation = new WithdrawMoneyOperation().builder().accountId(1L).value(2000.00).build();
 		
-		accountService.whithdrawMoney(moneyOperation);
+		//accountService.whithdrawMoney(moneyOperation);
 		
 	}
 	

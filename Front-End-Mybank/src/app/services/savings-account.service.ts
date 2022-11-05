@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { SavingsAccount } from '../model/SavingsAccount';
+import { Withdraw } from '../model/Withdraw';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class SavingsAccountService {
 
   public verifyIfExistsSavingsAccount(account:SavingsAccount){
     return this.http.post(`${this.UrlBaseApi}/exists-account`,account);
+  }
+
+  public withDrawMoney(withdraw:Withdraw){
+    return this.http.post<Withdraw>(`${this.UrlBaseApi}/withdraw-money`,withdraw);
   }
 
   public setAccountModel(accountModel:SavingsAccount){

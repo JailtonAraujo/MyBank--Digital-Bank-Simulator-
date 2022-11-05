@@ -3,11 +3,9 @@ package com.br.mybank.Model.Operations;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import com.br.mybank.Model.Account;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,9 +22,12 @@ public class WithdrawMoneyOperation implements Serializable{
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private Long accountId;
-	
+
+	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,optional = false)
+	@JoinColumn(name = "account_id")
+	@org.hibernate.annotations.ForeignKey(name = "fk_withdraw_account")
+	private Account account;
+
 	private Double value;
 	
 	private LocalDate date;

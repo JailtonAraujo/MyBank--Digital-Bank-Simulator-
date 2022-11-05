@@ -8,6 +8,8 @@ import { AdsRowComponent } from './ads-row/ads-row.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { HeaderMyaccountComponent } from './header-myaccount/header-myaccount.component';
 import { WithdrawMoneyComponentComponent } from './withdraw-money-component/withdraw-money-component.component';
+import { WithdrawSuccessComponent } from './dialogs/withdraw-success/withdraw-success.component';
+import { TransferSuccessComponent } from './dialogs/transfer-success/transfer-success.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { WithdrawMoneyComponentComponent } from './withdraw-money-component/with
     MyAccountComponent,
     HeaderMyaccountComponent,
     WithdrawMoneyComponentComponent,
+    WithdrawSuccessComponent,
+    TransferSuccessComponent,
   ],
   imports: [
     CommonModule,
