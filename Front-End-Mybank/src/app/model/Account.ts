@@ -1,8 +1,8 @@
 export class Account{
-    id?:number
-    agencia?:number
-    conta?:number
-    digito?:number
+    id?:Number
+    agencia?:Number
+    conta?:Number
+    digito?:Number
     dataAbertura?:Date
 
 }

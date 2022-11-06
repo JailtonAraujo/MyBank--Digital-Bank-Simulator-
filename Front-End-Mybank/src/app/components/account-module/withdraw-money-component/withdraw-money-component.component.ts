@@ -16,7 +16,7 @@ export class WithdrawMoneyComponentComponent implements OnInit {
 
 
   formWithdraw!:FormGroup;
-  withdraw!:Withdraw;
+  private withdrawModel!:Withdraw;
 
   constructor(
     private messageService:MessageService,
@@ -30,8 +30,9 @@ export class WithdrawMoneyComponentComponent implements OnInit {
     })
   }
 
+  //does all validations and Confirm the withdraw operation 
   public confirmWithdraw(){
-    console.log(Number(this.formWithdraw.get('value')!.value))
+   
     if(Number(this.formWithdraw.get('value')!.value) < 10){ 
       this.messageService.addMessage('O valor do saque presica ser no minimo R$ 10,00!','warning');
       return;
@@ -40,26 +41,30 @@ export class WithdrawMoneyComponentComponent implements OnInit {
       return;
     }
 
-    this.withdraw= this.formWithdraw.value;
+    this.withdrawModel= this.formWithdraw.value;
     let account  = new Account();
-    account = {id:1}
-    this.withdraw.account = account;
+    account = {id:1,agencia:1308,conta:1234567,digito:2}
+    this.withdrawModel.account = account;
     
-    this.savingsAccountService.withDrawMoney(this.withdraw).subscribe((resp)=>{
-      this.openDialogWithdrawSuccess(resp);
+    this.savingsAccountService.withDrawMoney(this.withdrawModel).subscribe((resp)=>{
+     
+      this.withdrawModel.date = resp.date;
+      this.withdrawModel.id = resp.id;
+      this.openDialogWithdrawSuccess(this.withdrawModel);
+      
+    },erro=>{
+      this.messageService.addMessage('Opps...Um erro inesperado ocerreu, tente mais tarde!','error');
     })
     
   }
 
-  //OPen withdraw operation success for show informations
+  //OPen withdraw operation success for show informations and withdraw operation certificate
   openDialogWithdrawSuccess(withdraw:Withdraw){
     const dialogRef = this.dialog.open(WithdrawSuccessComponent,{
       data:withdraw
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    
   }
 
 }

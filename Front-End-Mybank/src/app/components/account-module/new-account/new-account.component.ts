@@ -82,7 +82,7 @@ export class NewAccountComponent implements OnInit {
   }
 
 
-  public async handlerRegisterPerson(){
+  public handlerRegisterPerson(){
 
     if(this.getAge(this.formPerson.get('birthDate')?.value) < 18 ){
       this.messageService.addMessage('É necessario ter no minino 18 anos para abrir uma conta!','warning');
@@ -109,7 +109,8 @@ export class NewAccountComponent implements OnInit {
   }
 
 
-
+  //Get age in the Data received
+  //http://horadecodar.com.br/2022/09/15/como-calcular-a-idade-por-meio-da-data-de-nascimento-com-javascript/
   public getAge(dateString:string) {
     const today = new Date();
     const birthDate = new Date(dateString);

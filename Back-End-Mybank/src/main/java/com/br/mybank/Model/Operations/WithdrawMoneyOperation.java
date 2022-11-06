@@ -23,7 +23,7 @@ public class WithdrawMoneyOperation implements Serializable{
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,optional = false)
+	@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER,optional = false)
 	@JoinColumn(name = "account_id")
 	@org.hibernate.annotations.ForeignKey(name = "fk_withdraw_account")
 	private Account account;

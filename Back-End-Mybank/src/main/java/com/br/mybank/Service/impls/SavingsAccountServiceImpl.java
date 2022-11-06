@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.br.mybank.Service.AccountGenericServices;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,13 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	
 	@Autowired
 	protected WithdrawRepository withdrawRepository;
-	
+
 	@Autowired
 	protected ReportUtil reportUtil;
-	
-	Random random = new Random();
+
+	@Autowired
+	protected AccountGenericServices accountGenericServices;
+
 
 	@Override
 	public SavingsAccount generateNewAccount() {
@@ -42,11 +45,10 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
 		while (true) {
 
-			account = generatedModelAccount();// receive a model of generic account
+			account = accountGenericServices.generatedModelAccount();// receive a model of generic account
 
 			// verify if already exists a account with theses informations in database//
-			if (savingsAccountRepository.verifyIfExistsAccount(account.getAgencia(), account.getConta(),
-					account.getDigito()) == false) {
+			if (accountGenericServices.verifyIfExistsAccount(account) == false) {
 				break;
 			}
 		}
@@ -60,21 +62,6 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		savingsAccount.setDataAbertura(account.getDataAbertura());
 
 		return savingsAccount;
-	}
-
-	@Override
-	public Account generatedModelAccount() {
-
-		SavingsAccount account = new SavingsAccount();
-		account.setAgencia(1308);
-
-		account.setConta(random.nextInt(9999999));
-
-		account.setDigito(random.nextInt(9));
-
-		account.setDataAbertura(LocalDate.now());
-
-		return account;
 	}
 
 	@Override
@@ -128,7 +115,17 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
 	@Override
 	public Boolean verifyIfExistsAccount(Account account) {
-		return savingsAccountRepository.verifyIfExistsAccount(account.getAgencia(), account.getConta(), account.getDigito());
+		return accountGenericServices.verifyIfExistsAccount(account);
+	}
+
+	@Override
+	public String generateWithdrawOperationCertificate(Long withDrawId){
+
+		try {
+			return accountGenericServices.generateWithdrawOperationCertificate(withDrawId);
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 
 }

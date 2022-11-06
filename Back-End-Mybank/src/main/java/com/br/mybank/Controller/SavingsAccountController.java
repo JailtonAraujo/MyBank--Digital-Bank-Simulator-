@@ -1,6 +1,7 @@
 package com.br.mybank.Controller;
 
 import com.br.mybank.DTO.WithdrawDTO;
+import com.br.mybank.Service.AccountGenericServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,10 @@ public class SavingsAccountController {
 	
 	@PostMapping("/withdraw-money")
 	public ResponseEntity<WithdrawDTO> whithdrawMoney (@RequestBody WithdrawMoneyOperation withdrawMoneyOperation) throws Exception {
-	
-		WithdrawDTO  dto = new WithdrawDTO(this.savingsAccountService.whithdrawMoney(withdrawMoneyOperation));
+
+		WithdrawMoneyOperation withdrawMoneyOperation1 =this.savingsAccountService.whithdrawMoney(withdrawMoneyOperation);
+
+		WithdrawDTO  dto = new WithdrawDTO(withdrawMoneyOperation1);
 		
 		return ResponseEntity.ok(dto);
 		
@@ -38,15 +41,19 @@ public class SavingsAccountController {
 		return ResponseEntity.ok(this.savingsAccountService.generateSavingsAccountCertificate(accountId));
 		
 	}
-	
+
 	@PostMapping("/exists-account")
 	public ResponseEntity<Boolean> verifyIfExistsAccount( @RequestBody SavingsAccount account){
 		if(this.savingsAccountService.verifyIfExistsAccount(account)) {
 			return ResponseEntity.ok(true);
 		}
 		return new ResponseEntity<Boolean>(false,HttpStatus.NOT_FOUND);
-		
 
+	}
+
+	@GetMapping("/certificate-withdraw/{id}")
+	public ResponseEntity<String> generateWithdrawOperationCertificate( @PathVariable(name = "id") Long id ) throws Exception {
+		return ResponseEntity.ok(this.savingsAccountService.generateWithdrawOperationCertificate(id));
 	}
 	
 }

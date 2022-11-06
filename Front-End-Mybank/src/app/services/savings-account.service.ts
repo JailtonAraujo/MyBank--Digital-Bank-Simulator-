@@ -21,6 +21,10 @@ export class SavingsAccountService {
     return this.http.get(`${this.UrlBaseApi}/certificate-creted/${id}`,{responseType:'text'});
   }
 
+  public printWithdrawOperationCertificate(id:number){
+    return this.http.get(`${this.UrlBaseApi}/certificate-withdraw/${id}`,{responseType:'text'});
+  }
+
   public verifyIfExistsSavingsAccount(account:SavingsAccount){
     return this.http.post(`${this.UrlBaseApi}/exists-account`,account);
   }
