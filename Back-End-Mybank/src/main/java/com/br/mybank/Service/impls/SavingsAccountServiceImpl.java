@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.br.mybank.Service.AccountGenericServices;
+import com.br.mybank.exception.UnsupportedMathOperationException;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,7 +73,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		
 		//Verify if account balance is enough for complete the withdraw// 
 		if(currentSaldo < withdrawMoneyOperation.getValue() ) {
-			throw new Exception("Unable to complete action, Insufficient balance!");
+			throw new UnsupportedMathOperationException("Unable to complete action, Insufficient balance!");
 
 		}else {
 			savingsAccountRepository.withDrawMoney((currentSaldo - withdrawMoneyOperation.getValue()), withdrawMoneyOperation.getAccount().getId());
