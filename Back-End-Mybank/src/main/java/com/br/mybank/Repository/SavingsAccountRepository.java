@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.br.mybank.Model.SavingsAccount;
 
 @Repository
-@Transactional
 public interface SavingsAccountRepository extends JpaRepository<SavingsAccount, Long>{
 	
 	@Modifying

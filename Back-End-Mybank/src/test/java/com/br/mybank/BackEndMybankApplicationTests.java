@@ -68,15 +68,15 @@ class BackEndMybankApplicationTests {
 	@Test
 	void damiDateAccoutn() throws InterruptedException {
 		
-		for(int i = 1;i<=10;i++) {
+		for(int i = 1;i<=5;i++) {
 		
 		Random random = new Random();
 		int cpf = random.nextInt(9999999);
 		
 		PhysicalPerson person = new PhysicalPerson();
 		person.setCpf(Integer.toString(cpf));
-		person.setName("jasdjhjf");
-		person.setLastname("asdfdsaf");
+		person.setName("Jailton");
+		person.setLastname("Araujo");
 		
 //		AddressClass addressClass = new AddressClass();
 //		

@@ -5,7 +5,7 @@ import { Withdraw } from 'src/app/model/Withdraw';
 import { MessageService } from 'src/app/services/message.service';
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
 import { MatDialog } from '@angular/material/dialog';
-import { WithdrawSuccessComponent } from '../dialogs/withdraw-success/withdraw-success.component';
+import { WithdrawSuccessComponent } from '../../dialogs/withdraw-success/withdraw-success.component';
 
 @Component({
   selector: 'app-withdraw-money-component',

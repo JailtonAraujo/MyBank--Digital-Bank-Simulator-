@@ -11,4 +11,7 @@ public interface PhysicalPersonRepository extends JpaRepository<PhysicalPerson, 
 
 	@Query(value = "select count(1) > 0 from tbl_physicalperson where cpf = ?1")
 	public Boolean verifyIfExistsCpf (String cpf);
+
+	@Query(value = "select p.name, p.id from tbl_physicalperson p where p.name like ?1%")
+	public PhysicalPerson findByName(String name);
 }

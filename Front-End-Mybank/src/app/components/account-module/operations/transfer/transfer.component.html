@@ -1,0 +1,92 @@
+<main>
+    <div class="container-transfer">
+
+        <mat-stepper class="demo-stepper" #stepper linear [orientation]="(stepperOrientation | async)!" >
+            
+            <mat-step [stepControl]="formTransfer" [editable]="false">
+                
+                <ng-template  matStepLabel> Informações do destinatario</ng-template> 
+                    <form #transferForm="ngForm" class="form-field" [formGroup]="formTransfer">
+
+                        <fieldset>
+                            
+                        <legend>Transferir Dinheiro</legend>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Agência:</mat-label>
+                        <input matInput formControlName="agencia" maxlength="4" minlength="4"
+                        [brmasker]="{type:'num'}" required>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="fill">
+                        <mat-label>Conta:</mat-label>
+                        <input matInput formControlName="conta" maxlength="7" minlength="7"
+                        [brmasker]="{type:'num'}" required>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="fill">
+                        <mat-label>Digito:</mat-label>
+                        <input matInput formControlName="digito" maxlength="1" minlength="1"
+                        [brmasker]="{type:'num'}" required>
+                      </mat-form-field>
+    
+                    <mat-form-field appearance="fill">
+                        <input matInput [brmasker]="{money: true,  decimalCaracter: '.', decimal:2}" 
+                        maxlength="8" minlength="4" placeholder="Valor a Sacar..."  required formControlName="value">
+                        <span matPrefix>R$&nbsp;</span>
+                      </mat-form-field>
+
+                        <div class="search-container">
+                        <div class="input-search">
+                            <input type="text" placeholder="Buscar por nome..." (input)="searchPerson($event)">
+                        </div>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Clientes</mat-label>
+                            <mat-select [disabled]="!listPersons">
+                              <mat-option *ngFor="let element of listPersons" [value]="element.name" (onSelectionChange)="findPersonById(element.id)">
+                                {{element.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+
+    
+                    <div class="options">
+                        <button mat-raised-button color="primary" matStepperNext type="submit" [disabled]="transferForm.invalid">Proximo</button>
+                    </div>
+                </fieldset>
+                </form>
+                
+        </mat-step>
+
+               <mat-step linear #stepper [editable]="false" [stepControl]="confirmeForm">
+                <ng-template  matStepLabel> Finalizar</ng-template> 
+
+                    <form class="cofirmeForm form-field" [formGroup]="confirmeForm" #formConf="ngForm">
+
+                        <fieldset>
+                            <legend>Transferir dinheiro</legend>
+
+                            <h2>Nome: jaitlon de Araujo santos</h2>
+
+                            <h2>CPF: 080.965.606-99</h2>
+
+                            <p> <u><b>*Atenção*</b></u> Confira todos as informações, uma vez confirmada a operação não será possivel
+                                desfaze-la ou recuperar o saldo!</p>
+
+                            <div class="options">
+                                <button mat-raised-button color="primary"  type="submit" [disabled]="formConf.invalid">Confirmar</button>
+                                <mat-checkbox formControlName="confirme" required>Check me!</mat-checkbox>
+                            </div>
+
+                        </fieldset>
+
+                    </form>
+
+               </mat-step> 
+
+        </mat-stepper>
+
+    </div>
+</main>

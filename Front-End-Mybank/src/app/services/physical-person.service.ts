@@ -20,4 +20,8 @@ export class PhysicalPersonService {
   public createdNewSavingsAccount(physicalPerson:PhysicalPerson){
     return this.http.post<SavingsAccount>(`${this.urlBaseApiPhysicalPerson}/savings-account`,physicalPerson);
   }
+
+  public findUserByName(name:string){
+     return this.http.get<Array<any>>(`${this.urlBaseApiPhysicalPerson}/name/${name}`); 
+  }
 }

@@ -7,9 +7,10 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AdsRowComponent } from './ads-row/ads-row.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { HeaderMyaccountComponent } from './header-myaccount/header-myaccount.component';
-import { WithdrawMoneyComponentComponent } from './withdraw-money-component/withdraw-money-component.component';
+import { WithdrawMoneyComponentComponent } from './operations/withdraw-money-component/withdraw-money-component.component';
 import { WithdrawSuccessComponent } from './dialogs/withdraw-success/withdraw-success.component';
 import { TransferSuccessComponent } from './dialogs/transfer-success/transfer-success.component';
+import { TransferComponent } from './operations/transfer/transfer.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { TransferSuccessComponent } from './dialogs/transfer-success/transfer-su
     WithdrawMoneyComponentComponent,
     WithdrawSuccessComponent,
     TransferSuccessComponent,
+    TransferComponent,
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+import { Account } from "./Account";
 import { AddressModel } from "./Address";
 
 export interface PhysicalPerson{
@@ -6,5 +7,6 @@ export interface PhysicalPerson{
     lastname:string,
     cpf:string,
     password:string,
-    addressClass?:AddressModel
+    addressClass?:AddressModel,
+    account?:Account,
 }

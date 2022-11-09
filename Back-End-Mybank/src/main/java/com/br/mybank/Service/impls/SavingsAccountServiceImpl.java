@@ -21,6 +21,7 @@ import com.br.mybank.Service.ReportUtil;
 import com.br.mybank.Service.SavingsAccountService;
 
 import net.sf.jasperreports.engine.JRException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SavingsAccountServiceImpl implements SavingsAccountService {
@@ -65,7 +66,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		return savingsAccount;
 	}
 
+
 	@Override
+	@Transactional
 	public WithdrawMoneyOperation whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) throws Exception  {
 		
 		Double currentSaldo = findSaldoByAccountId(withdrawMoneyOperation.getAccount().getId());
