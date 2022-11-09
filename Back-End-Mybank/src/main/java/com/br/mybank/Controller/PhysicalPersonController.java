@@ -16,6 +16,8 @@ import com.br.mybank.DTO.AccountDTO;
 import com.br.mybank.Model.PhysicalPerson;
 import com.br.mybank.Service.PhysicalPersonService;
 
+import javax.persistence.NoResultException;
+
 @RestController
 @RequestMapping("/physical-person")
 public class PhysicalPersonController {
@@ -53,8 +55,17 @@ public class PhysicalPersonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PhysicalPersonDTO> findById() {
-        return null;
+    public ResponseEntity<PhysicalPersonDTO> findById( @PathVariable(name = "id") Long id) {
+
+        Optional<PhysicalPerson> optional = physicalPersonService.findById(id);
+
+        if(!optional.isPresent()){
+            throw new NoResultException("no person found.");
+        }
+
+        PhysicalPersonDTO dto = new PhysicalPersonDTO(optional.get());
+
+        return ResponseEntity.ok(dto);
     }
 
 }

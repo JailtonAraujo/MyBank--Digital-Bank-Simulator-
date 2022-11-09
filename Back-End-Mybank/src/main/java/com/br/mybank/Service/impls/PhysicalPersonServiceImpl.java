@@ -45,6 +45,11 @@ public class PhysicalPersonServiceImpl implements PhysicalPersonService{
 	}
 
 	@Override
+	public Optional<PhysicalPerson> findById(Long personId) {
+		return physicalPersonRepository.findById(personId);
+	}
+
+	@Override
 	public Boolean verifyIfExistsCpf(String cpf) {
 		
 		if(physicalPersonRepository.verifyIfExistsCpf(cpf)) {

@@ -16,30 +16,17 @@
 ::-webkit-input-placeholder
     color: variables.$primary-color
 
-
-
-.search-container
-    width: 100%
-    padding: 1em 0em
-    display: flex
-    gap: 1em
-
-
-.input-search
-    width: 100%
-    padding: 1em 0em
-    display: flex
-    flex-direction: column
-    input
-        width: 100%
-        background: none
-        outline: none
-        padding: 0.7em 0.5em
-        font-size: 1em
-        border: none
-        border-bottom: 1px solid variables.$primary-color
-        border-radius: 5px
-
 .options
     display: flex
     justify-content: space-between
+    align-items: center
+
+.search
+    padding-top: 1em
+    margin-top: 1em
+
+.search::before
+    content: ''
+    height: 1px
+    background-color: #aaa
+    display: block

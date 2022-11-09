@@ -13,8 +13,8 @@ public interface PhysicalPersonService {
 	
 	//Register new physical person with account in DataBase//
 	public PhysicalPerson registerNewPerson(PhysicalPerson physicalPerson);
-
 	public List<PhysicalPersonDTO> findByName(String name);
+	public Optional<PhysicalPerson> findById(Long personId);
 	
 	
 

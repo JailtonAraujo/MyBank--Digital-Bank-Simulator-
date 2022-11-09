@@ -13,7 +13,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 import { BrMaskerModule } from 'br-mask';
@@ -34,7 +34,7 @@ const AngularMaterialModules = [
   MatDatepickerModule,
   MatProgressSpinnerModule,
   MatDialogModule,
-  MatSelectModule,
+  MatAutocompleteModule,
 ]
 
 

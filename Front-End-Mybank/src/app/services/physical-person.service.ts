@@ -21,7 +21,11 @@ export class PhysicalPersonService {
     return this.http.post<SavingsAccount>(`${this.urlBaseApiPhysicalPerson}/savings-account`,physicalPerson);
   }
 
-  public findUserByName(name:string){
+  public findPersonByName(name:string){
      return this.http.get<Array<any>>(`${this.urlBaseApiPhysicalPerson}/name/${name}`); 
+  }
+
+  public findPersonByid(id:string){
+    return this.http.get<PhysicalPerson>(`${this.urlBaseApiPhysicalPerson}/${id}`);
   }
 }
