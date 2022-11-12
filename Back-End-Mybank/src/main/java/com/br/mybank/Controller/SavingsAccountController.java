@@ -1,6 +1,7 @@
 package com.br.mybank.Controller;
 
 import com.br.mybank.DTO.WithdrawDTO;
+import com.br.mybank.Model.Operations.TransferOperation;
 import com.br.mybank.Service.AccountGenericServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class SavingsAccountController {
 	@Autowired
 	protected SavingsAccountService savingsAccountService;
 	
-	@PostMapping("/withdraw-money")
+	@PostMapping("/operation/withdraw")
 	public ResponseEntity<WithdrawDTO> whithdrawMoney (@RequestBody WithdrawMoneyOperation withdrawMoneyOperation) throws Exception {
 
 		WithdrawMoneyOperation withdrawMoneyOperation1 =this.savingsAccountService.whithdrawMoney(withdrawMoneyOperation);
@@ -35,14 +36,14 @@ public class SavingsAccountController {
 		
 	}
 	
-	@GetMapping(value="/certificate-creted/{id}",produces = "application/text")
+	@GetMapping(value="/certificate/creted/{id}",produces = "application/text")
 	public ResponseEntity<String> generateSavingAccountCertificate( @PathVariable(name = "id") Long accountId ) throws InterruptedException{
 		
 		return ResponseEntity.ok(this.savingsAccountService.generateSavingsAccountCertificate(accountId));
 		
 	}
 
-	@PostMapping("/exists-account")
+	@PostMapping("/exists")
 	public ResponseEntity<Boolean> verifyIfExistsAccount( @RequestBody SavingsAccount account){
 		if(this.savingsAccountService.verifyIfExistsAccount(account)) {
 			return ResponseEntity.ok(true);
@@ -51,9 +52,15 @@ public class SavingsAccountController {
 
 	}
 
-	@GetMapping("/certificate-withdraw/{id}")
+	@GetMapping("/certificate/withdraw/{id}")
 	public ResponseEntity<String> generateWithdrawOperationCertificate( @PathVariable(name = "id") Long id ) throws Exception {
 		return ResponseEntity.ok(this.savingsAccountService.generateWithdrawOperationCertificate(id));
+	}
+
+	@PostMapping("/operation/transfer")
+	public ResponseEntity<TransferOperation> tranferOperation ( @RequestBody TransferOperation transferOperation){
+
+		return ResponseEntity.ok(this.savingsAccountService.transfer(transferOperation));
 	}
 	
 }

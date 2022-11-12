@@ -1,6 +1,7 @@
 package com.br.mybank.Service.impls;
 
 import com.br.mybank.DTO.PhysicalPersonDTO;
+import com.br.mybank.Model.Account;
 import com.br.mybank.Repository.PhysicalPersonCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,13 @@ public class PhysicalPersonServiceImpl implements PhysicalPersonService{
 
 	@Override
 	public Optional<PhysicalPerson> findById(Long personId) {
+
 		return physicalPersonRepository.findById(personId);
+	}
+
+	@Override
+	public Optional<PhysicalPersonDTO> findByAccount(Account account) throws Exception {
+		return Optional.of(personCustomRepository.findByAccount(account));
 	}
 
 	@Override

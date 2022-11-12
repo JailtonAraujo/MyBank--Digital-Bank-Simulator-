@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.br.mybank.DTO.PersonDTO;
 import com.br.mybank.DTO.PhysicalPersonDTO;
+import com.br.mybank.Model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +67,11 @@ public class PhysicalPersonController {
         PhysicalPersonDTO dto = new PhysicalPersonDTO(optional.get());
 
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/find/account")
+    public ResponseEntity<PhysicalPersonDTO> findUserByAccount(@RequestBody Account account) throws Exception {
+        return ResponseEntity.ok(physicalPersonService.findByAccount(account).get());
     }
 
 }

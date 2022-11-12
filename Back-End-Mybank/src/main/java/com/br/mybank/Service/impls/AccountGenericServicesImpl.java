@@ -51,7 +51,8 @@ public class AccountGenericServicesImpl implements AccountGenericServices {
 
     @Override
     public Account generatedModelAccount() {
-        SavingsAccount account = new SavingsAccount();
+        Account account = new Account();
+
         account.setAgencia(1308);
 
         account.setConta(random.nextInt(9999999));
@@ -59,6 +60,15 @@ public class AccountGenericServicesImpl implements AccountGenericServices {
         account.setDigito(random.nextInt(9));
 
         account.setDataAbertura(LocalDate.now());
+
+
+        while (true) {
+
+            // verify if already exists a account with theses informations in database//
+            if (verifyIfExistsAccount(account) == false) {
+                break;
+            }
+        }
 
         return account;
     }

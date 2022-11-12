@@ -1,10 +1,13 @@
 package com.br.mybank.Service.impls;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.br.mybank.Model.Operations.TransferOperation;
+import com.br.mybank.Repository.TransferRepository;
 import com.br.mybank.Service.AccountGenericServices;
 import com.br.mybank.exception.UnsupportedMathOperationException;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -34,6 +37,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	protected WithdrawRepository withdrawRepository;
 
 	@Autowired
+	protected TransferRepository  transferRepository;
+
+	@Autowired
 	protected ReportUtil reportUtil;
 
 	@Autowired
@@ -43,17 +49,8 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	@Override
 	public SavingsAccount generateNewAccount() {
 
-		Account account;
-
-		while (true) {
-
-			account = accountGenericServices.generatedModelAccount();// receive a model of generic account
-
-			// verify if already exists a account with theses informations in database//
-			if (accountGenericServices.verifyIfExistsAccount(account) == false) {
-				break;
-			}
-		}
+		//Receiving an account model generated and validated
+		Account account = accountGenericServices.generatedModelAccount();
 
 		// build a model savings account
 		SavingsAccount savingsAccount = new SavingsAccount().builder().taxaJuros_per_month((float) 0.5).saldo(1000.0)
@@ -68,7 +65,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = {Exception.class, SQLException.class})
 	public WithdrawMoneyOperation whithdrawMoney(WithdrawMoneyOperation withdrawMoneyOperation) throws Exception  {
 		
 		Double currentSaldo = findSaldoByAccountId(withdrawMoneyOperation.getAccount().getId());
@@ -79,14 +76,40 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 			throw new UnsupportedMathOperationException("Unable to complete action, Insufficient balance!");
 
 		}else {
-			savingsAccountRepository.withDrawMoney((currentSaldo - withdrawMoneyOperation.getValue()), withdrawMoneyOperation.getAccount().getId());
+			savingsAccountRepository.updateAccountSaldo((currentSaldo - withdrawMoneyOperation.getValue()), withdrawMoneyOperation.getAccount().getId());
 			withdrawMoneyOperation.setDate(LocalDate.now());
 			return withdrawRepository.save(withdrawMoneyOperation);
 		}
 		
 	}
-	
-	
+
+	@Override
+	@Transactional(rollbackFor = {Exception.class, SQLException.class})
+	public TransferOperation transfer(TransferOperation transferOperation) {
+
+		Double currentOriginAccountSaldo = findSaldoByAccountId(transferOperation.getAccountOrigem().getId());
+
+		if(currentOriginAccountSaldo < transferOperation.getValue()){
+			throw new UnsupportedMathOperationException("Unable to complete action, Insufficient balance!");
+		}else{
+
+			Double currentDestinyAccountSaldo = findSaldoByAccountId(transferOperation.getAccountDestino().getId());
+
+			//Updating origin account balance
+			savingsAccountRepository.updateAccountSaldo((currentOriginAccountSaldo - transferOperation.getValue()),transferOperation.getAccountOrigem().getId());
+
+			//Updating destiny account balance
+			savingsAccountRepository.updateAccountSaldo((currentOriginAccountSaldo + transferOperation.getValue()),transferOperation.getAccountDestino().getId());
+
+			transferOperation.setDate(LocalDate.now());
+
+			//Saving transfer operation and returning
+			return transferRepository.save(transferOperation);
+
+		}
+
+	}
+
 
 	@Override
 	public Double findSaldoByAccountId(Long accountId) {

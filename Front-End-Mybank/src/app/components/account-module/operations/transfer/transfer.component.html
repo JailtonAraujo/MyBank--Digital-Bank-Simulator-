@@ -14,20 +14,20 @@
 
             <mat-form-field appearance="fill">
               <mat-label>Agência:</mat-label>
-              <input matInput formControlName="agencia" maxlength="4" minlength="4"  
-              required placeholder="Informe a agência..." [readonly]="!hideCheckBox">
+              <input matInput formControlName="agencia" maxlength="4" minlength="4" 
+              required placeholder="Informe a agência..." [readonly]="!hideCheckBox" [brmasker]="{type:'num'}"> 
             </mat-form-field>
 
             <mat-form-field appearance="fill">
               <mat-label>Conta:</mat-label>
               <input matInput formControlName="conta" maxlength="7" minlength="7"  
-              required placeholder="Informe a conta..."[readonly]="!hideCheckBox">
+              required placeholder="Informe a conta..."[readonly]="!hideCheckBox"[brmasker]="{type:'num'}">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
               <mat-label>Digito:</mat-label>
               <input matInput formControlName="digito" maxlength="1" minlength="1"  
-              required placeholder="Informe o digito..."[readonly]="!hideCheckBox">
+              required placeholder="Informe o digito..."[readonly]="!hideCheckBox"[brmasker]="{type:'num'}">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
@@ -57,6 +57,7 @@
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
+              <mat-spinner diameter="25" *ngIf="loading"></mat-spinner>
             </div>
 
             <div class="info-person" *ngIf="physicalPersonReturned && !hideCheckBox">
@@ -86,7 +87,7 @@
 
             <div class="options">
               <button mat-raised-button color="primary" type="submit" [disabled]="formConf.invalid" (click)="confirmTranfer()">Confirmar</button>
-              <mat-checkbox formControlName="confirme" required>Check me!</mat-checkbox>
+              <mat-checkbox formControlName="confirme" required>Confirmo as informações!</mat-checkbox>
             </div>
 
           </fieldset>

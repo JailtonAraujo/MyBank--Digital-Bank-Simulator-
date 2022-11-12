@@ -6,6 +6,7 @@ import { map, Observable } from 'rxjs';
 import { Account } from 'src/app/model/Account';
 import { PhysicalPerson } from 'src/app/model/PhysicalPerson';
 import { TranferModel } from 'src/app/model/TransferModel';
+import { MessageService } from 'src/app/services/message.service';
 import { PhysicalPersonService } from 'src/app/services/physical-person.service';
 
 @Component({
@@ -15,20 +16,24 @@ import { PhysicalPersonService } from 'src/app/services/physical-person.service'
 })
 export class TransferComponent implements OnInit {
 
+  //components variables
   hideCheckBox=true;
-
   stepperOrientation!:Observable<StepperOrientation>;
+  loading:boolean = false;
 
+  //Models
   physicalPersonReturned!:PhysicalPerson;
   tranferModel!:TranferModel;
+  listPersons!:Array<any>;
 
+  //forms
   formTransfer!:FormGroup;
   confirmeForm!:FormGroup;
 
-  listPersons!:Array<any>;
 
   constructor(
     private physicalPersonService:PhysicalPersonService,
+    private messageService:MessageService,
     breakpointObserver: BreakpointObserver
     ) { 
       this.stepperOrientation = breakpointObserver
@@ -37,8 +42,6 @@ export class TransferComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
-
 
     this.formTransfer = new FormGroup({
       agencia: new FormControl('',[Validators.required]),
@@ -58,8 +61,11 @@ export class TransferComponent implements OnInit {
 
    if(!name){
     return;
+    //message(Nome obrigatorio para efetuar busca)
    }
     
+    this.loading = true;
+
    this.physicalPersonService.findPersonByName(name).subscribe((resp)=>{
     if(resp.length ==  0){
       this.listPersons = [];
@@ -67,8 +73,11 @@ export class TransferComponent implements OnInit {
     }
     
     this.listPersons = resp;
+    this.loading = false;
    },error =>{
     this.listPersons = [];
+    console.log(error);
+    this.loading = false;
    })
 
   }
@@ -89,7 +98,25 @@ export class TransferComponent implements OnInit {
     })
   }
 
-  //Confirme tranfer in backEnd
+  //Find person by account if user choose insert account informations manually
+  public findPersonByAccount(){
+    if(this.hideCheckBox){
+      const account:Account = {
+        agencia:this.formTransfer.get('agencia')?.value,
+        conta:this.formTransfer.get('conta')?.value,
+        digito:this.formTransfer.get('digito')?.value
+      };
+
+      this.physicalPersonService.findPersonByAccount(account).subscribe((resp)=>{
+        this.physicalPersonReturned = resp;
+      },error=>{
+        console.log(error);
+      })
+
+    }
+  }
+
+  //Confirme tranfer
   public confirmTranfer(){
 
     this.tranferModel ={
@@ -98,12 +125,6 @@ export class TransferComponent implements OnInit {
       value:this.formTransfer.get('value')?.value
     }
     console.log(this.tranferModel); 
-  }
-
-  public findPersonByAccount(){
-    if(this.hideCheckBox){
-      console.log("pegou")
-    }
   }
 
 }

@@ -1,6 +1,7 @@
 package com.br.mybank.Service;
 
 import com.br.mybank.DTO.PhysicalPersonDTO;
+import com.br.mybank.Model.Account;
 import com.br.mybank.Model.PhysicalPerson;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public interface PhysicalPersonService {
 	public PhysicalPerson registerNewPerson(PhysicalPerson physicalPerson);
 	public List<PhysicalPersonDTO> findByName(String name);
 	public Optional<PhysicalPerson> findById(Long personId);
+	public Optional<PhysicalPersonDTO> findByAccount(Account account) throws Exception;
 	
 	
 

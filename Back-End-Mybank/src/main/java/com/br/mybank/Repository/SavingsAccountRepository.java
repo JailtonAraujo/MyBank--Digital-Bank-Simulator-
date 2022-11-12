@@ -13,7 +13,7 @@ public interface SavingsAccountRepository extends JpaRepository<SavingsAccount, 
 	
 	@Modifying
 	@Query(value = "update tbl_savingsaccount set saldo = ?1 where id = ?2 ")
-	public void withDrawMoney (Double value, Long accountId);
+	public void updateAccountSaldo (Double value, Long accountId);
 	
 	@Query(value = "select saldo from tbl_savingsaccount where id = ?1")
 	public Double findSaldoByAccountId(Long accountId);

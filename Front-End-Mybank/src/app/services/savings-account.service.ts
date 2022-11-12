@@ -18,19 +18,19 @@ export class SavingsAccountService {
 
 
   public printCreatedAccountCertificate(id:number){
-    return this.http.get(`${this.UrlBaseApi}/certificate-creted/${id}`,{responseType:'text'});
+    return this.http.get(`${this.UrlBaseApi}/certificate/creted/${id}`,{responseType:'text'});
   }
 
   public printWithdrawOperationCertificate(id:number){
-    return this.http.get(`${this.UrlBaseApi}/certificate-withdraw/${id}`,{responseType:'text'});
+    return this.http.get(`${this.UrlBaseApi}/certificate/withdraw/${id}`,{responseType:'text'});
   }
 
   public verifyIfExistsSavingsAccount(account:SavingsAccount){
-    return this.http.post(`${this.UrlBaseApi}/exists-account`,account);
+    return this.http.post(`${this.UrlBaseApi}/exists`,account);
   }
 
   public withDrawMoney(withdraw:Withdraw){
-    return this.http.post<Withdraw>(`${this.UrlBaseApi}/withdraw-money`,withdraw);
+    return this.http.post<Withdraw>(`${this.UrlBaseApi}/operation/withdraw`,withdraw);
   }
 
   public setAccountModel(accountModel:SavingsAccount){

@@ -28,8 +28,10 @@ public class WithdrawMoneyOperation implements Serializable{
 	@org.hibernate.annotations.ForeignKey(name = "fk_withdraw_account")
 	private Account account;
 
+	@Column(nullable = false)
 	private Double value;
-	
+
+	@Column(nullable = false)
 	private LocalDate date;
 	
 
