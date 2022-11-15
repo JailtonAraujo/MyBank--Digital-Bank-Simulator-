@@ -10,4 +10,6 @@ public interface AccountGenericServices {
     public Account generatedModelAccount();
 
     public Boolean verifyIfExistsAccount(Account account);
+    
+    public String generateTransferCertificate(Long transferId) throws Exception ;
 }

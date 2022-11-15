@@ -36,14 +36,14 @@
 				<staticText>
 					<reportElement style="Title" x="30" y="0" width="307" height="66" forecolor="#FFA500" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
 					<textElement>
-						<font isBold="false"/>
+						<font fontName="SansSerif" isBold="false"/>
 					</textElement>
 					<text><![CDATA[MyBank]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="0" y="66" width="554" height="29" forecolor="#FFA500" uuid="8978eac3-c578-41c9-837e-48d2b0184642"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="22" isBold="false"/>
+						<font fontName="SansSerif" size="22" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Comprovante de saque]]></text>
 				</staticText>
@@ -53,7 +53,7 @@
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement x="380" y="10" width="174" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
+						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
@@ -62,7 +62,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
+						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Emitido em:]]></text>
 				</staticText>
@@ -78,14 +78,14 @@
 						<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					</reportElement>
 					<textElement verticalAlignment="Middle">
-						<font size="18"/>
+						<font fontName="SansSerif" size="18"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="10" y="10" width="60" height="30" uuid="be8b7c3a-b636-4fcb-8077-dca69b5f4478"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="18" isBold="true"/>
+						<font fontName="SansSerif" size="18" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Data:]]></text>
 				</staticText>
@@ -94,35 +94,35 @@
 						<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="18"/>
+						<font fontName="SansSerif" size="18"/>
 					</textElement>
 					<textFieldExpression><![CDATA["R$ "+$F{value}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="10" y="60" width="60" height="30" uuid="ecae92fc-5bbb-4b80-b459-de7bfae3e5b4"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="18" isBold="true"/>
+						<font fontName="SansSerif" size="18" isBold="true"/>
 					</textElement>
 					<text><![CDATA[valor:]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="104" y="130" width="106" height="30" uuid="78d3fc65-70dd-4957-b63c-5f0b0d8afaa3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="18"/>
+						<font fontName="SansSerif" size="18"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{account}.getAgencia()]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="10" y="130" width="90" height="30" uuid="e7455d33-534b-445d-88c8-1d901365d9ab"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="18" isBold="true"/>
+						<font fontName="SansSerif" size="18" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Agência:]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="90" y="180" width="400" height="30" uuid="b4e15928-b6b5-4811-a001-fbbfc43aeeef"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="18"/>
+						<font fontName="SansSerif" size="18"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{account}.getConta()+"-"+$F{account}.getDigito()]]></textFieldExpression>
 				</textField>
@@ -131,7 +131,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="18" isBold="true"/>
+						<font fontName="SansSerif" size="18" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Conta:]]></text>
 				</staticText>

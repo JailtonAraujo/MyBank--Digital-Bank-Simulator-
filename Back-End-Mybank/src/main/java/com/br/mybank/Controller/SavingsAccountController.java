@@ -1,8 +1,5 @@
 package com.br.mybank.Controller;
 
-import com.br.mybank.DTO.WithdrawDTO;
-import com.br.mybank.Model.Operations.TransferOperation;
-import com.br.mybank.Service.AccountGenericServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.mybank.Model.Account;
+import com.br.mybank.DTO.WithdrawDTO;
 import com.br.mybank.Model.SavingsAccount;
+import com.br.mybank.Model.Operations.TransferOperation;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
 import com.br.mybank.Service.SavingsAccountService;
 
@@ -61,6 +59,12 @@ public class SavingsAccountController {
 	public ResponseEntity<TransferOperation> tranferOperation ( @RequestBody TransferOperation transferOperation){
 
 		return ResponseEntity.ok(this.savingsAccountService.transfer(transferOperation));
+	}
+	
+	@GetMapping(value = "/certificate/transfer/{id}", produces = "application/text")
+	public ResponseEntity<String> generateTransferCertificate( @PathVariable(name = "id") Long transferId ) throws Exception{
+	
+		return ResponseEntity.ok(this.savingsAccountService.generateTransferCertificate(transferId));
 	}
 	
 }

@@ -21,6 +21,8 @@ public interface SavingsAccountService{
 
 	//Generate certificate of withdraw operation
 	public String generateWithdrawOperationCertificate( Long withdrawId) throws Exception;
+	
+	public String generateTransferCertificate(Long transferId) throws Exception ;
 
 	public Boolean verifyIfExistsAccount(Account account);
 }

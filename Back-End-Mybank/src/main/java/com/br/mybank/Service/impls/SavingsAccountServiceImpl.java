@@ -155,4 +155,11 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		}
 	}
 
+
+	@Override
+	public String generateTransferCertificate(Long transferId) throws Exception {
+		
+		return accountGenericServices.generateTransferCertificate(transferId);
+	}
+
 }

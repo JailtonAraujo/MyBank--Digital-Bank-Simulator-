@@ -1,13 +1,18 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { StepperOrientation } from '@angular/material/stepper';
 import { map, Observable } from 'rxjs';
 import { Account } from 'src/app/model/Account';
 import { PhysicalPerson } from 'src/app/model/PhysicalPerson';
 import { TranferModel } from 'src/app/model/TransferModel';
+import { LoadingService } from 'src/app/services/loading.service';
 import { MessageService } from 'src/app/services/message.service';
 import { PhysicalPersonService } from 'src/app/services/physical-person.service';
+import { SavingsAccountService } from 'src/app/services/savings-account.service';
+import { TransferSuccessComponent } from '../../dialogs/transfer-success/transfer-success.component';
+
 
 @Component({
   selector: 'app-transfer',
@@ -34,6 +39,9 @@ export class TransferComponent implements OnInit {
   constructor(
     private physicalPersonService:PhysicalPersonService,
     private messageService:MessageService,
+    private savingsAccountService:SavingsAccountService,
+    private loadingService:LoadingService,
+    private dialog:MatDialog,
     breakpointObserver: BreakpointObserver
     ) { 
       this.stepperOrientation = breakpointObserver
@@ -57,7 +65,7 @@ export class TransferComponent implements OnInit {
 
   //Find Person by name 
   public searchPersonByName(event:any){
-   const name = event.target.value
+   const name = event.target.value;
 
    if(!name){
     return;
@@ -74,6 +82,7 @@ export class TransferComponent implements OnInit {
     
     this.listPersons = resp;
     this.loading = false;
+    
    },error =>{
     this.listPersons = [];
     console.log(error);
@@ -101,6 +110,7 @@ export class TransferComponent implements OnInit {
   //Find person by account if user choose insert account informations manually
   public findPersonByAccount(){
     if(this.hideCheckBox){
+      
       const account:Account = {
         agencia:this.formTransfer.get('agencia')?.value,
         conta:this.formTransfer.get('conta')?.value,
@@ -119,12 +129,45 @@ export class TransferComponent implements OnInit {
   //Confirme tranfer
   public confirmTranfer(){
 
+   let accountDestino:Account = this.physicalPersonReturned.account as Account;
+   accountDestino.person = {
+    name:this.physicalPersonReturned.name,
+    cpf:this.physicalPersonReturned.cpf,
+    lastname:this.physicalPersonReturned.lastname,
+    password:""
+   };
+
+
     this.tranferModel ={
-      destino:this.physicalPersonReturned.account as Account,
-      origem:this.physicalPersonReturned.account as Account,
+      accountDestino,
+      accountOrigem:{id:1},
       value:this.formTransfer.get('value')?.value
     }
-    console.log(this.tranferModel); 
+
+
+    this.loadingService.isLoading(true);
+     
+    this.savingsAccountService.transfer(this.tranferModel).subscribe((res)=>{
+      
+      //setting Id of the transfer that was confirmed
+      this.tranferModel.id =res.id;
+
+      //sendind transfer full for component TranferSuccessDialog
+      this.openTransferDialog(this.tranferModel);
+
+      this.loadingService.isLoading(false);
+    },error =>{
+      console.log(error);
+      this.loadingService.isLoading(false);
+    })
+  }
+
+
+
+  public openTransferDialog(transfer:TranferModel){
+    const dialogRef = this.dialog.open(TransferSuccessComponent,{
+      data:transfer,
+    })
   }
 
 }

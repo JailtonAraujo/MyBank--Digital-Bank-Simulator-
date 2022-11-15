@@ -1,1 +1,28 @@
-<p>transfer-success works!</p>
+<h1 mat-dialog-title>Transferência efetuada com sucesso!</h1>
+<mat-dialog-content class="mat-typography">
+  
+    <div class="info-origin">
+        <h2>Origem:</h2>
+        <p>Nome: Jailton araujo </p>
+        <p>CPF: 545645645645</p>
+        <p>Agência: 45454554</p>
+        <p>Conta: 45454 - 5</p>
+    </div>
+
+    <div class="info-destiny">
+        <h2>Destino:</h2>
+        <p>Nome: {{transfer.accountDestino.person?.name}}</p>
+        <p>CPF: {{transfer.accountDestino.person?.cpf}}</p>
+        <p>Agência: {{transfer.accountDestino.agencia}}</p>
+        <p>Conta: {{transfer.accountDestino.conta}} - {{transfer.accountDestino.digito}}</p>
+    </div>
+
+    <mat-dialog-actions align="end">
+        <div class="btns">
+            <button mat-raised-button color="accent" (click)="printTranferCertificate()">Imprimir conprovante</button>
+            <button mat-dialog-close mat-raised-button color="primary" >Continuar</button>
+        </div>
+    </mat-dialog-actions>
+
+</mat-dialog-content>
+
