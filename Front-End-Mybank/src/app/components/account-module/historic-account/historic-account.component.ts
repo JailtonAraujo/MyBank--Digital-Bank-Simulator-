@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HistoricService } from 'src/app/services/historic.service';
 
 const ELEMENT_DATA_trans: any[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -34,7 +35,7 @@ const ELEMENT_DATA_saque: any[] = [
 
 export class HistoricAccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(private historicService:HistoricService) { }
 
   ngOnInit(): void {
   }
@@ -51,7 +52,7 @@ export class HistoricAccountComponent implements OnInit {
     tabPosition == 0 ? console.log("Entrada") : console.log("saida") 
   }
 
-  public findAllSaques(){
+  public getAllWithdrawHistoricByAccountId(){
     
   } 
 
