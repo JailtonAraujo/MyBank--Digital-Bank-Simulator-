@@ -12,9 +12,12 @@ import com.br.mybank.Service.AccountGenericServices;
 import com.br.mybank.exception.UnsupportedMathOperationException;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.br.mybank.DTO.AccountReportDTO;
+import com.br.mybank.DTO.ObjectPaginationOperationsAccount;
+import com.br.mybank.DTO.WithdrawDTO;
 import com.br.mybank.Model.Account;
 import com.br.mybank.Model.SavingsAccount;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
@@ -118,48 +121,18 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	}
 
 	@Override
-	public String generateSavingsAccountCertificate(Long accountId) {
-		
-		List<AccountReportDTO> dtos = new ArrayList<AccountReportDTO>();
-		
-		AccountReportDTO dto = new AccountReportDTO(savingsAccountRepository.findById(accountId).get());
-		
-		dtos.add(dto);
-		
-		try {
-			String certificateBase64 = "data:application/pdf;base64," + Base64.encodeBase64String(
-					reportUtil.generatedReport(dtos, "report_created_account")
-					);
-			
-			return certificateBase64;
-			
-		} catch (JRException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
-	@Override
 	public Boolean verifyIfExistsAccount(Account account) {
 		return accountGenericServices.verifyIfExistsAccount(account);
 	}
 
+	
+	
+	/*No implementation*/
+	
 	@Override
-	public String generateWithdrawOperationCertificate(Long withDrawId){
-
-		try {
-			return accountGenericServices.generateWithdrawOperationCertificate(withDrawId);
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
-	}
-
-
-	@Override
-	public String generateTransferCertificate(Long transferId) throws Exception {
-		
-		return accountGenericServices.generateTransferCertificate(transferId);
+	public Account generatedModelAccount() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

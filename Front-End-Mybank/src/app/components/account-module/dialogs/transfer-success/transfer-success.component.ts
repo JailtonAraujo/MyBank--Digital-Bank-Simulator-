@@ -2,9 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ReportDialogComponent } from 'src/app/components/report-dialog/report-dialog.component';
 import { TranferModel } from 'src/app/model/TransferModel';
-import { Withdraw } from 'src/app/model/Withdraw';
 import { LoadingService } from 'src/app/services/loading.service';
-import { SavingsAccountService } from 'src/app/services/savings-account.service';
+import { CertificateService } from 'src/app/services/certificate.service';
 
 @Component({
   selector: 'app-transfer-success',
@@ -18,7 +17,7 @@ export class TransferSuccessComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data:TranferModel,
     private dialog:MatDialog,
-    private savingsAccountService:SavingsAccountService,
+    private certificateService:CertificateService,
     private loadingService:LoadingService
   ) { }
 
@@ -30,7 +29,7 @@ export class TransferSuccessComponent implements OnInit {
 
     this.loadingService.isLoading(true);
 
-    this.savingsAccountService.printTransferCertificate(Number(this.transfer.id)).subscribe((res)=>{
+    this.certificateService.printTransferCertificate(Number(this.transfer.id)).subscribe((res)=>{
       this.openReportDialodWithCertificate(res);
       this.loadingService.isLoading(false);
     })

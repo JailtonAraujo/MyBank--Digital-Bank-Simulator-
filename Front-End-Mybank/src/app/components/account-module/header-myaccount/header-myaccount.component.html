@@ -11,9 +11,9 @@
             <li class="actions">
                 <button mat-raised-button color="accent" [matMenuTriggerFor]="beforeMenu">Serviços</button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before">
-                    <a routerLink="withdraw" mat-menu-item>Sacar</a>
+                    <a routerLink="withdraw" mat-menu-item>Saque</a>
                     <a routerLink="trasnfer" mat-menu-item>Traferência</a>
-                    <button mat-menu-item>Histório</button>
+                    <a routerLink="historic" mat-menu-item>Histório</a>
                 </mat-menu>
             </li>
             <li class="options-account">
@@ -46,9 +46,9 @@
         <fieldset class="options-mobile">
             <legend>Ola,Jailton</legend>
         <ul [classList]="classList">
-            <li><a routerLink="withdraw">Sacar</a></li>
-            <li>Transferir</li>
-            <li>Histórico</li>
+            <li><a routerLink="withdraw">Saque</a></li>
+            <li> <a routerLink="trasnfer">Transferir</a></li>
+            <li> <a routerLink="historic">Histórico</a></li>
             <li><a routerLink="/myaccount">Inicio</a></li>
             <li>Sair</li>
         </ul>

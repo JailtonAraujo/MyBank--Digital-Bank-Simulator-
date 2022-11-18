@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from 'src/app/services/address.service';
 import { MessageService } from 'src/app/services/message.service';
 import { PhysicalPerson } from 'src/app/model/PhysicalPerson';
@@ -7,6 +7,10 @@ import { PhysicalPersonService } from 'src/app/services/physical-person.service'
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/loading.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {StepperOrientation} from '@angular/material/stepper';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-account',
@@ -16,7 +20,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class NewAccountComponent implements OnInit {
 
   hide=true;
-  OrientacionStteper:any;
+  stepperOrientation!: Observable<StepperOrientation>;
 
   formTerms!:FormGroup;
   formAdress!:FormGroup;
@@ -30,13 +34,16 @@ export class NewAccountComponent implements OnInit {
     private physicalPersonService:PhysicalPersonService,
     private savingsAccountService:SavingsAccountService,
     private router:Router,
-    private loadingService:LoadingService) { }
+    private loadingService:LoadingService,
+    breakpointObserver: BreakpointObserver
+    ) { 
+      this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 600px)')
+      .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
+    }
 
   ngOnInit(): void {
 
-    const mainLement = document.getElementsByTagName('main')[0];
-
-    this.OrientacionStteper = mainLement.clientWidth < 460 ? 'vertical' : 'horizontal';
 
     this.formTerms =  new FormGroup({
       acepteTerms : new FormControl('',[Validators.required])
@@ -124,12 +131,5 @@ export class NewAccountComponent implements OnInit {
     
     return age;
 }
-
-  //resize page based on width
-  resizeView(event:any){
-    let width = event.target.innerWidth;
-
-    this.OrientacionStteper = width < 460 ? 'vertical' : 'horizontal';
-  }
 
 }

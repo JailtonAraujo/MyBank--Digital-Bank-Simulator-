@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+//Materia modules
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -14,6 +15,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 
 import { BrMaskerModule } from 'br-mask';
@@ -35,6 +38,9 @@ const AngularMaterialModules = [
   MatProgressSpinnerModule,
   MatDialogModule,
   MatAutocompleteModule,
+  MatTabsModule,
+  MatTableModule,
+  
 ]
 
 

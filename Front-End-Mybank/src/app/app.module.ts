@@ -9,7 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AccountModuleModule } from './components/account-module/account-module.module';
 
-import { FlashMessagesComponent } from './components/flash-messages/flash-messages.component';
+
 import { LoadingComponent } from './components/loading/loading.component';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
 import { AuthFormComponent } from './pages/auth-form/auth-form.component';
@@ -21,7 +21,6 @@ import { AuthFormComponent } from './pages/auth-form/auth-form.component';
     AppComponent,
     FooterComponent,
     HomeComponent,
-    FlashMessagesComponent,
     LoadingComponent,
     ReportDialogComponent,
     AuthFormComponent

@@ -1,11 +1,13 @@
 <header>
 
 </header>
-<main (window:resize)="resizeView($event)">
+<main>
     <div class="container-new-acount">
 
-        <div class="content-forms" id="divtest">
-             <mat-stepper linear #stepper [orientation]="OrientacionStteper" id="mat-stapperhorizontal" h> 
+        <div class="content-forms" >
+         
+
+             <mat-stepper linear #stepper [orientation]="(stepperOrientation | async)!"> 
 
                 <!--Stepper Terms-->
                 <mat-step [stepControl]="formTerms" [editable]="false">

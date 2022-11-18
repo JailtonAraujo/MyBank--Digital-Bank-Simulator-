@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlashMessagesComponent } from './flash-messages.component';
+import { HistoricAccountComponent } from './historic-account.component';
 
-describe('FlashMessagesComponent', () => {
-  let component: FlashMessagesComponent;
-  let fixture: ComponentFixture<FlashMessagesComponent>;
+describe('HistoricAccountComponent', () => {
+  let component: HistoricAccountComponent;
+  let fixture: ComponentFixture<HistoricAccountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FlashMessagesComponent ]
+      declarations: [ HistoricAccountComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FlashMessagesComponent);
+    fixture = TestBed.createComponent(HistoricAccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

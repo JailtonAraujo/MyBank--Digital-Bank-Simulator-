@@ -11,6 +11,8 @@ import { WithdrawMoneyComponentComponent } from './operations/withdraw-money-com
 import { WithdrawSuccessComponent } from './dialogs/withdraw-success/withdraw-success.component';
 import { TransferSuccessComponent } from './dialogs/transfer-success/transfer-success.component';
 import { TransferComponent } from './operations/transfer/transfer.component';
+import { HistoricAccountComponent } from './historic-account/historic-account.component';
+import { TblHistoricComponent } from './tbl-historic/tbl-historic.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { TransferComponent } from './operations/transfer/transfer.component';
     WithdrawSuccessComponent,
     TransferSuccessComponent,
     TransferComponent,
+    HistoricAccountComponent,
+    TblHistoricComponent,
   ],
   imports: [
     CommonModule,

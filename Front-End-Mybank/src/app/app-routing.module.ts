@@ -8,6 +8,7 @@ import { WithdrawMoneyComponentComponent } from './components/account-module/ope
 import { AuthFormComponent } from './pages/auth-form/auth-form.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TransferComponent } from './components/account-module/operations/transfer/transfer.component';
+import { HistoricAccountComponent } from './components/account-module/historic-account/historic-account.component';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path:'myaccount',component:AdsRowComponent},
   {path:'myaccount',component:MyAccountComponent,children:[
     {path:'withdraw',component:WithdrawMoneyComponentComponent},
-    {path:"trasnfer",component:TransferComponent}
+    {path:"trasnfer",component:TransferComponent},
+    {path:"historic",component:HistoricAccountComponent}
   ]}
 ];
 

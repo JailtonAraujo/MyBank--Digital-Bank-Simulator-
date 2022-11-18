@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SavingsAccount } from 'src/app/model/SavingsAccount';
 import { LoadingService } from 'src/app/services/loading.service';
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
+import { CertificateService } from 'src/app/services/certificate.service'; 
 import { ReportDialogComponent } from '../../report-dialog/report-dialog.component';
 
 @Component({
@@ -19,7 +20,8 @@ export class SuccessCreatedAccountComponent implements OnInit {
     private savingsAccountService:SavingsAccountService,
     private router:Router,
     private dialog:MatDialog,
-    private loadingService:LoadingService) { }
+    private loadingService:LoadingService,
+    private certificateService:CertificateService) { }
 
   ngOnInit(): void {
 
@@ -43,7 +45,7 @@ export class SuccessCreatedAccountComponent implements OnInit {
 
     this.loadingService.isLoading(true);
 
-    this.savingsAccountService.printCreatedAccountCertificate(Number(this.account.id)).subscribe((resp)=>{
+    this.certificateService.printCreatedAccountCertificate(Number(this.account.id)).subscribe((resp)=>{
       this.openDialog(resp);
       this.loadingService.isLoading(false);
     

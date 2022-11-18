@@ -34,12 +34,13 @@ public class SavingsAccountController {
 		
 	}
 	
-	@GetMapping(value="/certificate/creted/{id}",produces = "application/text")
-	public ResponseEntity<String> generateSavingAccountCertificate( @PathVariable(name = "id") Long accountId ) throws InterruptedException{
-		
-		return ResponseEntity.ok(this.savingsAccountService.generateSavingsAccountCertificate(accountId));
-		
+	@PostMapping("/operation/transfer")
+	public ResponseEntity<TransferOperation> tranferOperation ( @RequestBody TransferOperation transferOperation){
+
+		return ResponseEntity.ok(this.savingsAccountService.transfer(transferOperation));
 	}
+	
+	
 
 	@PostMapping("/exists")
 	public ResponseEntity<Boolean> verifyIfExistsAccount( @RequestBody SavingsAccount account){
@@ -50,21 +51,5 @@ public class SavingsAccountController {
 
 	}
 
-	@GetMapping("/certificate/withdraw/{id}")
-	public ResponseEntity<String> generateWithdrawOperationCertificate( @PathVariable(name = "id") Long id ) throws Exception {
-		return ResponseEntity.ok(this.savingsAccountService.generateWithdrawOperationCertificate(id));
-	}
-
-	@PostMapping("/operation/transfer")
-	public ResponseEntity<TransferOperation> tranferOperation ( @RequestBody TransferOperation transferOperation){
-
-		return ResponseEntity.ok(this.savingsAccountService.transfer(transferOperation));
-	}
-	
-	@GetMapping(value = "/certificate/transfer/{id}", produces = "application/text")
-	public ResponseEntity<String> generateTransferCertificate( @PathVariable(name = "id") Long transferId ) throws Exception{
-	
-		return ResponseEntity.ok(this.savingsAccountService.generateTransferCertificate(transferId));
-	}
 	
 }

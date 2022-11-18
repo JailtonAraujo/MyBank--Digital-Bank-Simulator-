@@ -35,6 +35,8 @@ public class PhysicalPersonController {
             return new ResponseEntity<String>(HttpStatus.OK);
         }
     }
+    
+    
 
     @PostMapping(value = "/savings-account")
     public ResponseEntity<AccountDTO> registerNewPersonAndSavingsAccount(@RequestBody PhysicalPerson physicalPerson) throws SQLIntegrityConstraintViolationException {
@@ -54,6 +56,8 @@ public class PhysicalPersonController {
 
         return ResponseEntity.ok(physicalPersonService.findByName(name));
     }
+    
+    
 
     @GetMapping("/{id}")
     public ResponseEntity<PhysicalPersonDTO> findById( @PathVariable(name = "id") Long id) {
@@ -69,6 +73,8 @@ public class PhysicalPersonController {
         return ResponseEntity.ok(dto);
     }
 
+    
+    
     @PostMapping("/find/account")
     public ResponseEntity<PhysicalPersonDTO> findUserByAccount(@RequestBody Account account) throws Exception {
         return ResponseEntity.ok(physicalPersonService.findByAccount(account).get());

@@ -1,0 +1,19 @@
+<main>
+    <h2>Historico bancario</h2>
+<div class="content-tab-group">
+<mat-tab-group animationDuration="0ms" (focusChange)="evttest($event)">
+
+    <mat-tab label="Saques" >
+
+      <app-tbl-historic [elementData]="elements_saldo" [displaycolun]="displayedColumns_saldo"></app-tbl-historic>
+
+    </mat-tab>
+
+
+    <mat-tab label="Transferências">
+      <app-tbl-historic [elementData]="elemenst" [displaycolun]="displayedColumns_trans"></app-tbl-historic>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>
+</main>
