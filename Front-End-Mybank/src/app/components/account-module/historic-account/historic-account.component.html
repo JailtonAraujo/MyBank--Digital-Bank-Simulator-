@@ -5,13 +5,46 @@
 
     <mat-tab label="Saques" >
 
-      <app-tbl-historic [elementData]="elements_saldo" [displaycolun]="displayedColumns_saldo"></app-tbl-historic>
+      <table mat-table [dataSource]="elements_saque" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID: </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Valor: </th>
+          <td mat-cell *matCellDef="let element"> {{"R$ "+element.value}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Data: </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns_saque"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns_saque;"></tr>
+      </table>
+      <mat-paginator [length]="totalItens_saque"
+              [pageSize]="10"
+              aria-label="Select page"
+              showFirstLastButtons
+              (page)="nextPage($event);">
+      </mat-paginator>
 
     </mat-tab>
 
 
     <mat-tab label="Transferências">
-      <app-tbl-historic [elementData]="elemenst" [displaycolun]="displayedColumns_trans"></app-tbl-historic>
+      <app-tbl-historic [elementData]="elemenst" [displaycolun]="displayedColumns_trans"
+      [totalItens]="20"></app-tbl-historic>
+  
     </mat-tab>
 
   </mat-tab-group>

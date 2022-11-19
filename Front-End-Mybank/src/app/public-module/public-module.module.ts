@@ -17,6 +17,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 import { BrMaskerModule } from 'br-mask';
@@ -40,6 +41,7 @@ const AngularMaterialModules = [
   MatAutocompleteModule,
   MatTabsModule,
   MatTableModule,
+  MatPaginatorModule,
   
 ]
 

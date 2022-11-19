@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ObjectPagination } from 'src/app/model/ObjectPagination';
 import { HistoricService } from 'src/app/services/historic.service';
 
 const ELEMENT_DATA_trans: any[] = [
@@ -38,13 +39,17 @@ export class HistoricAccountComponent implements OnInit {
   constructor(private historicService:HistoricService) { }
 
   ngOnInit(): void {
+    this.getAllWithdrawHistoricByAccountId();
   }
 
   displayedColumns_trans: string[] = ['name', 'weight', 'symbol', 'position'];
-  displayedColumns_saldo: string[] = ['name', 'Value', 'data'];
+  displayedColumns_saque: string[] = ['id', 'value', 'date'];
+
+  totalItens_saque:number = 0;
+  totalItens_transfer:number = 0;
 
   elemenst = ELEMENT_DATA_trans;
-  elements_saldo = ELEMENT_DATA_saque;
+  elements_saque=[];
 
   public evttest(event:any){
     const tabPosition = event.index;
@@ -53,7 +58,34 @@ export class HistoricAccountComponent implements OnInit {
   }
 
   public getAllWithdrawHistoricByAccountId(){
+
+    const objectPagination:ObjectPagination ={
+      accountId:1,
+      offset:0,
+      limit:10
+    }
     
+    this.historicService.getAllSWithdrawHistoricByAccountId(objectPagination).subscribe((res)=>{
+      
+      this.elements_saque = res.content;
+      this.totalItens_saque = res.totalElements;
+
+    })
   } 
+
+  public nextPage(offset:any){
+
+    const objectPagination:ObjectPagination ={
+      accountId:1,
+      offset:(offset.pageIndex*10),
+      limit:10
+    }
+
+    this.historicService.getAllSWithdrawHistoricByAccountId(objectPagination).subscribe((res)=>{
+      this.elements_saque = res.content;
+      this.totalItens_saque = res.totalElements;
+    })
+
+  }
 
 }

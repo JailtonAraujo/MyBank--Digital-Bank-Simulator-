@@ -9,4 +9,9 @@
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
   </table>
+  <mat-paginator [length]="totalItens"
+              [pageSize]="10"
+              aria-label="Select page"
+              (page)="nextPage($event);">
+</mat-paginator>
   

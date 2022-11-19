@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Withdraw } from '../model/Withdraw';
+import { ObjectPagination } from '../model/ObjectPagination';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,7 @@ export class HistoricService {
   constructor(private http:HttpClient) { }
 
 
-  public getAllSWithdrawHistoricByAccountId(accountId:number){
-    this.http.get<Array<Withdraw>>(`${this.urlBaseApiHistoric}/withdraw/${accountId}`);
+  public getAllSWithdrawHistoricByAccountId(objectPagination:ObjectPagination){
+    return this.http.post<any>(`${this.urlBaseApiHistoric}/withdraw`,objectPagination);
   }
 }
