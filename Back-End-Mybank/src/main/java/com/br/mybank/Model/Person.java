@@ -30,6 +30,11 @@ public abstract class Person implements Serializable{
 	
 	private String lastname;
 	
+	private String username;
+	
+	private String password;
+	
+	
 	@OneToOne( mappedBy = "person", cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
 	private Account account;
 	

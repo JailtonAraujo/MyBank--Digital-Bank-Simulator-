@@ -10,6 +10,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.br.mybank.DTO.AuthDTO;
 import com.br.mybank.Model.Account;
 import com.br.mybank.Model.Operations.TransferOperation;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
@@ -63,6 +64,7 @@ public class AccountGenericServicesImpl implements AccountGenericServices {
     public Boolean verifyIfExistsAccount(Account account) {
         return accountSuperRepository.verifyIfExistsAccount(account.getAgencia(),account.getConta(),account.getDigito());
     }
+
 
 
 }

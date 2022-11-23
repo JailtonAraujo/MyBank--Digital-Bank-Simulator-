@@ -1,7 +1,7 @@
 <main>
     <h2>Historico bancario</h2>
 <div class="content-tab-group">
-<mat-tab-group animationDuration="0ms" (focusChange)="evttest($event)">
+<mat-tab-group animationDuration="0ms">
 
     <mat-tab label="Saques" >
 
@@ -31,20 +31,66 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns_saque"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns_saque;"></tr>
       </table>
+
       <mat-paginator [length]="totalItens_saque"
               [pageSize]="10"
               aria-label="Select page"
               showFirstLastButtons
-              (page)="nextPage($event);">
+              (page)="nextPageTblSaque($event);">
       </mat-paginator>
 
     </mat-tab>
 
 
     <mat-tab label="Transferências">
-      <app-tbl-historic [elementData]="elemenst" [displaycolun]="displayedColumns_trans"
-      [totalItens]="20"></app-tbl-historic>
-  
+
+      
+      <table mat-table [dataSource]="elemenst_transfer" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID: </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="namePersonOrigem">
+          <th mat-header-cell *matHeaderCellDef> Nome Origem: </th>
+          <td mat-cell *matCellDef="let element"> {{element.namePersonOrigem}} </td>
+        </ng-container>
+
+         <!-- Name Column -->
+         <ng-container matColumnDef="namePersonDestino">
+          <th mat-header-cell *matHeaderCellDef> Nome Favorecido: </th>
+          <td mat-cell *matCellDef="let element"> {{element.namePersonDestino}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Valor: </th>
+          <td mat-cell *matCellDef="let element"> {{"R$ "+element.value}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Data: </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns_transfer"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns_transfer;"></tr>
+      </table>
+
+      <mat-paginator [length]="totalItens_transfer"
+              [pageSize]="10"
+              aria-label="Select page"
+              showFirstLastButtons
+              (page)="nextPageTblTransfer($event);">
+      </mat-paginator>
+      
+
+
     </mat-tab>
 
   </mat-tab-group>

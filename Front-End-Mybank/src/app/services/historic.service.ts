@@ -16,4 +16,8 @@ export class HistoricService {
   public getAllSWithdrawHistoricByAccountId(objectPagination:ObjectPagination){
     return this.http.post<any>(`${this.urlBaseApiHistoric}/withdraw`,objectPagination);
   }
+
+  public getAllTransferHistoricByAccountId(objectPagination:ObjectPagination){
+    return this.http.post<any>(`${this.urlBaseApiHistoric}/transfer`,objectPagination);
+  }
 }

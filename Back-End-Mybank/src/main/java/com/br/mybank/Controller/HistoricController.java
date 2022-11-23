@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.mybank.DTO.ObjectPaginationOperationsAccount;
+import com.br.mybank.DTO.TransferDTO;
 import com.br.mybank.DTO.WithdrawDTO;
 import com.br.mybank.Service.HistoricService;
 
@@ -23,5 +24,12 @@ public class HistoricController {
 	public ResponseEntity<Page<WithdrawDTO>> getAllWithdrawOperationsByAccountId( @RequestBody ObjectPaginationOperationsAccount objectPagination ){
 		
 		return ResponseEntity.ok(historicService.getAllWithdrawOperarionsByAccountId(objectPagination));
+	}
+	
+	
+	@PostMapping(value = "/transfer")
+	public ResponseEntity<Page<TransferDTO>> getAllTrasnferOperationsByAccountId( @RequestBody ObjectPaginationOperationsAccount objectPagination ){
+		
+		return ResponseEntity.ok(historicService.getAllTrasnferOperationByAccountId(objectPagination));
 	}
 }
