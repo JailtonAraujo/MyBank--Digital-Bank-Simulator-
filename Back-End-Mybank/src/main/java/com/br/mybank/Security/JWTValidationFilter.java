@@ -20,7 +20,7 @@ public class JWTValidationFilter extends BasicAuthenticationFilter{
 	
 	private static final String HEADER_KEY = "Authorization";
 	
-	private static final String TOKEN_PREFIX ="Bearer";
+	private static final String TOKEN_PREFIX ="Bearer ";
 	
 	private final String SECRET;
 
