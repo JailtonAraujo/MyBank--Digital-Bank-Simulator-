@@ -14,7 +14,7 @@ export class AuthService {
 
   //
   public login (auth:any){
-    return this.http.post<Auth>(`${this.urlBaseApi}`,auth);
+    return this.http.post<Auth>(`${this.urlBaseApi}`,auth).pipe();
   }
 
   public logout(){

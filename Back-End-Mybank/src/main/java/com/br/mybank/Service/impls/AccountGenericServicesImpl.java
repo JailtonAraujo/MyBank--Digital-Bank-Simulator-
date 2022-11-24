@@ -10,6 +10,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.br.mybank.DTO.AccountDTO;
 import com.br.mybank.DTO.AuthDTO;
 import com.br.mybank.Model.Account;
 import com.br.mybank.Model.Operations.TransferOperation;
@@ -42,7 +43,7 @@ public class AccountGenericServicesImpl implements AccountGenericServices {
 
         account.setAgencia(1308);
 
-        account.setConta(random.nextInt(9999999));
+        account.setConta(random.nextInt(1111111,9999999));
 
         account.setDigito(random.nextInt(9));
 
@@ -65,6 +66,14 @@ public class AccountGenericServicesImpl implements AccountGenericServices {
         return accountSuperRepository.verifyIfExistsAccount(account.getAgencia(),account.getConta(),account.getDigito());
     }
 
+	@Override
+	public AccountDTO getCurrentAccount(Long accountId) {
+		
+		AccountDTO dto = new AccountDTO(accountSuperRepository.findById(accountId).get());
+		
+		return dto;
+	}
 
+	
 
 }

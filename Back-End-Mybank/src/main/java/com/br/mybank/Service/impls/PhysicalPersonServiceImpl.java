@@ -4,6 +4,8 @@ import com.br.mybank.DTO.PhysicalPersonDTO;
 import com.br.mybank.Model.Account;
 import com.br.mybank.Repository.PhysicalPersonCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.br.mybank.Model.PhysicalPerson;
@@ -27,6 +29,12 @@ public class PhysicalPersonServiceImpl implements PhysicalPersonService{
 
 	@Autowired
 	protected PhysicalPersonCustomRepository personCustomRepository;
+	
+	private final PasswordEncoder encoder;
+	
+	public PhysicalPersonServiceImpl ( PasswordEncoder encoder) {
+		this.encoder = encoder;
+	}
 
 
 	@Override
@@ -35,6 +43,14 @@ public class PhysicalPersonServiceImpl implements PhysicalPersonService{
 		
 		physicalPerson.setAccount(savingsAccountService.generateNewAccount());
 		physicalPerson.getAccount().setPerson(physicalPerson);
+		
+		final String username = physicalPerson.getAccount().getAgencia()
+				+""+physicalPerson.getAccount().getConta()
+				+""+physicalPerson.getAccount().getDigito();
+		
+		
+		physicalPerson.setUsername(username);
+		physicalPerson.setPassword( encoder.encode( physicalPerson.getPassword() ));
 		
 		return physicalPersonRepository.save(physicalPerson);
 	}

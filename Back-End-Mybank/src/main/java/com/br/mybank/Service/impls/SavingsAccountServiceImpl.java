@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.br.mybank.BackEndMybankApplication;
+import com.br.mybank.DTO.AccountDTO;
 import com.br.mybank.DTO.AccountReportDTO;
 import com.br.mybank.DTO.AuthDTO;
 import com.br.mybank.DTO.ObjectPaginationOperationsAccount;
@@ -134,6 +136,14 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	public Account generatedModelAccount() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public AccountDTO getCurrentAccount(Long accountId) {
+		
+		
+		return accountGenericServices.getCurrentAccount(accountId);
 	}
 
 

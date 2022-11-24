@@ -109,6 +109,7 @@ export class NewAccountComponent implements OnInit {
       this.router.navigate(['account-created']);
 
     },error =>{
+      console.log(error)
       this.messageService.addMessage(`${error.message}`,'error');
       this.loadingService.isLoading(false);
     })
