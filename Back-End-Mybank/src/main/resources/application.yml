@@ -10,8 +10,10 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
-    
-    
+
+server:
+  servlet:
+    context-path: /api
     
 jwt:
   secret: f8460fcd-42e3-4bfd-a6c6-c07023625bd7

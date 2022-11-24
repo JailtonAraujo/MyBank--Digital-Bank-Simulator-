@@ -14,12 +14,8 @@ public class AuthDTO {
 	private Long userId;
 
 	private String name;
-
-	private String lastname;
 	
 	private Long accountId;
-	
-	private Double saldoAccount;
 	
 	private String token;
 	

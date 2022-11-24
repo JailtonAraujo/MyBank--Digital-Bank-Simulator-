@@ -50,6 +50,13 @@ public class SavingsAccountController {
 		return new ResponseEntity<Boolean>(false,HttpStatus.NOT_FOUND);
 
 	}
+	
+	@GetMapping("/saldo/{id}")
+	public ResponseEntity<Double> getSaldoByAccountId(@PathVariable(name = "id") Long id ){
+		
+		return ResponseEntity.ok(this.savingsAccountService.findSaldoByAccountId(id));
+		
+	}
 
 	
 }

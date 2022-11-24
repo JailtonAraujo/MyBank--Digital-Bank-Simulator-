@@ -29,6 +29,10 @@ export class SavingsAccountService {
     return this.http.post<TranferModel>(`${this.UrlBaseApiSavingsAccount}/operation/transfer`,transer);
   }
 
+  public getSaldoAccountById(id:Number){
+    return this.http.get<Number>(`${this.UrlBaseApiSavingsAccount}/saldo/${id}`);
+  }
+
   //Get and Sets
   public setAccountModel(accountModel:SavingsAccount){
     this.AccountModel = accountModel;

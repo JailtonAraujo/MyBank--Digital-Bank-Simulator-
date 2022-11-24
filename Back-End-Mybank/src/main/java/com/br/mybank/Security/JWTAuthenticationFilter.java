@@ -56,7 +56,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			
 		} catch (Exception e) {
 			
-			throw new RuntimeException("Error authentication user",e);
+			throw new RuntimeException("Error authentication user");
 		}
 		
 	}

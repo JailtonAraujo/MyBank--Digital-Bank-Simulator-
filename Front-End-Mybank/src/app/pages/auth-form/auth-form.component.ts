@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SavingsAccount } from 'src/app/model/SavingsAccount';
+import { AuthService } from 'src/app/services/auth.service';
+import { MessageService } from 'src/app/services/message.service';
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
 
 @Component({
@@ -18,6 +20,8 @@ export class AuthFormComponent implements OnInit {
 
   constructor(
     private savingsAccountService:SavingsAccountService,
+    private authService:AuthService,
+    private messageService:MessageService,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -35,8 +39,26 @@ export class AuthFormComponent implements OnInit {
     })
   }
 
+  
   public authenticate(){
-    console.log(this.formAccount.value);
+
+    const auth ={
+      username: this.formAccount.get('agencia')?.value+this.formAccount.get('conta')?.value+this.formAccount.get('digito')?.value,
+      password:this.formAccount.get('password')?.value
+    }
+    //if success login set auth object in localStorage
+    this.authService.login(auth).subscribe((resp)=>{
+      localStorage.setItem('authMyBank',JSON.stringify(resp));
+      
+      this.messageService.addMessage(`Bem vindo ${resp.name}!`,'success');
+    },error=>{
+      if(error.status == 403){
+        this.messageService.addMessage('Informações de conta ou senha incorreta!','error');
+      }else{
+      this.messageService.addMessage('opss, algo aconteceu, por favor tente mais tarde!','warning');
+    }
+    console.log(error);
+    })
   }
 
 }

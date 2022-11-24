@@ -93,10 +93,8 @@ public class PhysicalPersonCustomRepository implements Serializable {
     public AuthDTO findUserById(Long userId) {
     	
     	
-    	Query query = entityManager.createNativeQuery("select tbl_physicalperson.id, tbl_physicalperson.name, tbl_physicalperson.lastname, tbl_savingsaccount.id as accountId, tbl_savingsaccount.saldo\r\n"
-    			+ "from tbl_physicalperson\r\n"
-    			+ "inner join account on account.person_id = tbl_physicalperson.id\r\n"
-    			+ "inner join tbl_savingsaccount on tbl_savingsaccount.id = account.id\r\n"
+    	Query query = entityManager.createNativeQuery("select tbl_physicalperson.id, tbl_physicalperson.name, account.id as accountId\r\n"
+    			+ "from tbl_physicalperson inner join account on account.person_id = tbl_physicalperson.id\r\n"
     			+ "where tbl_physicalperson.id = ?");
     	
     	query.setParameter(1, userId);
@@ -108,9 +106,8 @@ public class PhysicalPersonCustomRepository implements Serializable {
     		
     		AuthDTO authDTO = new AuthDTO().builder().userId( Long.parseLong(object[0].toString()))
     												 .name(object[1].toString())
-    												 .lastname(object[2].toString())
-    												 .accountId(Long.parseLong(object[3].toString()))
-    												 .saldoAccount(Double.valueOf(object[4].toString())).build();
+    												
+    												 .accountId(Long.parseLong(object[2].toString())).build();
     		
     		return authDTO;
     												 

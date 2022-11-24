@@ -13,6 +13,8 @@ import { AccountModuleModule } from './components/account-module/account-module.
 import { LoadingComponent } from './components/loading/loading.component';
 import { ReportDialogComponent } from './components/report-dialog/report-dialog.component';
 import { AuthFormComponent } from './pages/auth-form/auth-form.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RequestsInterceptor } from './guards/requests.interceptor';
 
 
 
@@ -35,7 +37,13 @@ import { AuthFormComponent } from './pages/auth-form/auth-form.component';
   exports:[
   ],
 
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:RequestsInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

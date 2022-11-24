@@ -1,9 +1,9 @@
 <header>
     <nav class="nav-bar">
         <div class="self-menu">
-            <button mat-button color="accent" mat-button [matMenuTriggerFor]="selfmenu">➤ Olá, Jailton</button>
+            <button mat-button color="accent" mat-button [matMenuTriggerFor]="selfmenu">➤ Olá, {{nameUser}}</button>
             <mat-menu #selfmenu="matMenu">
-                <a routerLink="/" mat-menu-item color="warn" id="btn-sair">Sair</a>
+                <button mat-menu-item color="warn" id="btn-sair" (click)="(logout())">Sair</button>
                 <a routerLink="/myaccount" mat-menu-item id="btn-inicio">Inicio</a>
             </mat-menu>
         </div>
@@ -19,7 +19,7 @@
             <li class="options-account">
 
                 <div class="balance-info">
-                    <input matInput [type]="hide ? 'password' : 'text'" value="R$1000" readonly>
+                    <input matInput [type]="hide ? 'password' : 'text'" [value]="'R$ '+saldo" readonly>
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -36,7 +36,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <div class="balance-info">
-            <input matInput [type]="hide ? 'password' : 'text'" value="R$1000" readonly>
+            <input matInput [type]="hide ? 'password' : 'text'"  [value]="'R$ '+saldo" readonly>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -44,13 +44,13 @@
         </div>
         </div>
         <fieldset class="options-mobile">
-            <legend>Ola,Jailton</legend>
+            <legend>Ola, {{nameUser}}</legend>
         <ul [classList]="classList">
             <li><a routerLink="withdraw">Saque</a></li>
             <li> <a routerLink="trasnfer">Transferir</a></li>
             <li> <a routerLink="historic">Histórico</a></li>
             <li><a routerLink="/myaccount">Inicio</a></li>
-            <li>Sair</li>
+            <li> <button mat-menu-item color="warn" id="btn-sair" (click)="(logout())">Sair</button></li>
         </ul>
     </fieldset>
     </nav>
