@@ -97,7 +97,7 @@ export class NewAccountComponent implements OnInit {
     }
 
     this.physicalPerson = this.formPerson.value;
-    this.physicalPerson.addressClass = this.formAdress.value;
+    this.physicalPerson.address = this.formAdress.value;
 
     this.loadingService.isLoading(true);
 

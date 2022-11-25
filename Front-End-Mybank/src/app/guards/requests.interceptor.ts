@@ -37,17 +37,13 @@ export class RequestsInterceptor implements HttpInterceptor {
 
   handlerError(error: HttpErrorResponse){
     let errorMsg = '';
-    if (error.error instanceof ErrorEvent) {
-       console.log('This is client side error');
-       errorMsg = `Error: ${error.error.message}`;
-    } else {
-       console.log('This is server side error');
-       errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-    }
     if(error.status == 403){
       errorMsg = "Acesso negado ou sessão expirada, faça login!";
     } else if(error.status == 500){
-      errorMsg = "Erro interno, por favor, tente mais tarde!";
+      errorMsg = "Erro interno, por favor, tente mais tarde";
+    }else{
+      console.log(error.error);
+    return throwError(error);
     }
 
     console.log(errorMsg);

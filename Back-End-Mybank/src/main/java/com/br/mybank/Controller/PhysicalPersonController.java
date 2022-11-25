@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.br.mybank.DTO.AccountDTO;
 import com.br.mybank.Model.PhysicalPerson;
 import com.br.mybank.Service.PhysicalPersonService;
+import com.br.mybank.exception.AlreadyExistsCPFException;
 
 import javax.persistence.NoResultException;
 
@@ -27,10 +28,10 @@ public class PhysicalPersonController {
     protected PhysicalPersonService physicalPersonService;
 
     @PostMapping(value = "/verifyifexistscpf")
-    public ResponseEntity<String> verifyIfExistsCpf(@RequestBody PhysicalPerson person) {
+    public ResponseEntity<String> verifyIfExistsCpf(@RequestBody PhysicalPerson person) throws AlreadyExistsCPFException {
 
         if (this.physicalPersonService.verifyIfExistsCpf(person.getCpf())) {
-            return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
+            throw new AlreadyExistsCPFException("CPF Already exists!");
         } else {
             return new ResponseEntity<String>(HttpStatus.OK);
         }

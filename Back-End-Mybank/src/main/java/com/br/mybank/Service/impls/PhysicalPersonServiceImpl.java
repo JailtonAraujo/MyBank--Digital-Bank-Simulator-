@@ -48,6 +48,7 @@ public class PhysicalPersonServiceImpl implements PhysicalPersonService{
 				+""+physicalPerson.getAccount().getConta()
 				+""+physicalPerson.getAccount().getDigito();
 		
+		physicalPerson.getAddress().setPerson(physicalPerson);
 		
 		physicalPerson.setUsername(username);
 		physicalPerson.setPassword( encoder.encode( physicalPerson.getPassword() ));

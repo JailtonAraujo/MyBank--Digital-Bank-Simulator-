@@ -38,8 +38,8 @@ public abstract class Person implements Serializable{
 	@OneToOne( mappedBy = "person", cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
 	private Account account;
 	
-//	@OneToOne(mappedBy = "person", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-//	private AddressClass address;
+	@OneToOne(mappedBy = "person", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+	private AddressClass address;
 	
 
 }

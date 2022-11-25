@@ -1,5 +1,6 @@
 package com.br.mybank.exception.handler;
 
+import com.br.mybank.exception.AlreadyExistsCPFException;
 import com.br.mybank.exception.ExceptionResponse;
 import com.br.mybank.exception.UnsupportedMathOperationException;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -51,6 +52,15 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(),webRequest.getDescription(false));
 
         return new ResponseEntity<ExceptionResponse>(exceptionResponse,HttpStatus.FORBIDDEN);
+    }
+    
+    
+    @ExceptionHandler({AlreadyExistsCPFException.class})
+    public final ResponseEntity<ExceptionResponse> handlerAlreadyExistisCPFExceptions(Exception ex, WebRequest webRequest){
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(),webRequest.getDescription(false));
+
+        return new ResponseEntity<ExceptionResponse>(exceptionResponse,HttpStatus.NOT_ACCEPTABLE);
     }
     
       

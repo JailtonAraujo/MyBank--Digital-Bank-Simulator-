@@ -34,7 +34,7 @@ public class AddressClass implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "person_id")
 	@ForeignKey(name = "fk_addres_person")
 	private Person person;
