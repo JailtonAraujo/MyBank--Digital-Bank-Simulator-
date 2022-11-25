@@ -15,6 +15,8 @@ import { ReportDialogComponent } from './components/report-dialog/report-dialog.
 import { AuthFormComponent } from './pages/auth-form/auth-form.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestsInterceptor } from './guards/requests.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { saldoReducer } from './store/saldoReducer';
 
 
 
@@ -32,7 +34,8 @@ import { RequestsInterceptor } from './guards/requests.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     PublicModuleModule,
-    AccountModuleModule
+    AccountModuleModule,
+    StoreModule.forRoot({saldoReducer:saldoReducer})
   ],
   exports:[
   ],
