@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Value("${jwt.secret}")
 	private String SECRET;
 	
-	private String [] uriAuthorized = {"/physical-person/**","/savings-account/exists"};
+	private String [] uriAuthorized = {"/physical-person/**","/savings-account/exists","/certificate/create/**"};
 	
     public SecurityConfig(ImplUserDatailsService implUserDatailsService, PhysicalPersonCustomRepository physicalPersonCustomRepository) {
     	

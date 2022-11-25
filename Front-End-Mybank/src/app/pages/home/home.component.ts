@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
         this.messageService.addMessage('Conta não encontrada, revise os dados e tente novamente!','warning');
         return
       }
+      console.log(error)
       this.messageService.addMessage('Opps...Ocorreu um erro inesperado, tente mais tarde','error');
     })
   }

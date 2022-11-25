@@ -19,20 +19,15 @@ export class RequestsInterceptor implements HttpInterceptor {
 
     const currentUri = tempUris[(tempUris.length-1)];
 
-    const urisAuthorizeds = ["login","exists","viacep","savings-account","create"];
-
-    if(currentUri.includes(urisAuthorizeds[0]) || currentUri.includes(urisAuthorizeds[1]) || 
-    request.url.includes(urisAuthorizeds[2]) || currentUri.includes(urisAuthorizeds[3])){
-      return next.handle(request);
-    }
-
-    if(localStorage.getItem('authMyBank') !== null || localStorage.getItem('authMyBank') !== '' || localStorage.getItem('authMyBank'))  {
+    if(localStorage.getItem('authMyBank') !== null && localStorage.getItem('authMyBank') !== '')  {
 
       const token = JSON.parse(String(localStorage.getItem('authMyBank'))).token;
 
-      request = request.clone({
-        setHeaders: {'Authorization':token}
-      })
+      if(token){
+        request = request.clone({
+          setHeaders: {'Authorization':token}
+        })
+      }
 
     }
 
@@ -49,11 +44,13 @@ export class RequestsInterceptor implements HttpInterceptor {
        console.log('This is server side error');
        errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
     }
-    console.log(errorMsg);
-
     if(error.status == 403){
-      localStorage.clear();
+      errorMsg = "Acesso negado ou sessão expirada, faça login!";
+    } else if(error.status == 500){
+      errorMsg = "Erro interno, por favor, tente mais tarde!";
     }
+
+    console.log(errorMsg);
     return throwError(errorMsg);
   }
 }

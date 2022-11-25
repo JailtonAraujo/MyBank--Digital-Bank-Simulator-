@@ -51,6 +51,8 @@ export class AuthFormComponent implements OnInit {
       localStorage.setItem('authMyBank',JSON.stringify(resp));
       
       this.messageService.addMessage(`Bem vindo ${resp.name}!`,'success');
+
+      this.router.navigate(['/myaccount'])
     },error=>{
       if(error.status == 403){
         this.messageService.addMessage('Informações de conta ou senha incorreta!','error');

@@ -52,7 +52,7 @@ export class WithdrawMoneyComponentComponent implements OnInit {
       this.withdrawModel.id = resp.id;
       this.openDialogWithdrawSuccess(this.withdrawModel);
       
-    },erro=>{
+    },error=>{
       this.messageService.addMessage('Opps...Um erro inesperado ocerreu, tente mais tarde!','error');
     })
     
