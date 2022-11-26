@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.mybank.DTO.AccountDTO;
+import com.br.mybank.DTO.AccountReportDTO;
 import com.br.mybank.DTO.WithdrawDTO;
 import com.br.mybank.Model.SavingsAccount;
 import com.br.mybank.Model.Operations.TransferOperation;
@@ -59,7 +59,7 @@ public class SavingsAccountController {
 	}
 	
 	@GetMapping("/currentaccount/{id}")
-	public ResponseEntity<AccountDTO>  getCurrentAccountById( @PathVariable(name = "id") Long id ) {
+	public ResponseEntity<AccountReportDTO>  getCurrentAccountById( @PathVariable(name = "id") Long id ) {
 		
 		return ResponseEntity.ok(this.savingsAccountService.getCurrentAccount(id));
 		

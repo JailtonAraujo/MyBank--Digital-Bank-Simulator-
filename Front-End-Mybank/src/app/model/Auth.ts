@@ -1,13 +1,11 @@
-export interface Auth {
-    userId:Number
+export class Auth {
+    userId?:Number
 
-	name:String
+	name?:String
 
-	lastname:String
-
-	accountId:Number
+	accountId?:Number
     
-	saldoAccount:Number
+	saldoAccount?:Number
 
-	token:String
+	token?:String
 }

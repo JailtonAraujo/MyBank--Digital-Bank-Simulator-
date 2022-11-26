@@ -1,7 +1,6 @@
 package com.br.mybank.Service;
 
-import com.br.mybank.DTO.AccountDTO;
-import com.br.mybank.DTO.AuthDTO;
+import com.br.mybank.DTO.AccountReportDTO;
 import com.br.mybank.Model.Account;
 
 public interface AccountGenericServices {
@@ -10,7 +9,7 @@ public interface AccountGenericServices {
 
     public Boolean verifyIfExistsAccount(Account account);
     
-    public AccountDTO getCurrentAccount(Long accountId);
+    public AccountReportDTO getCurrentAccount(Long accountId);
    
     
     

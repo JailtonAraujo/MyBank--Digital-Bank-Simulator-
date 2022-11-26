@@ -3,14 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { StepperOrientation } from '@angular/material/stepper';
+import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { Account } from 'src/app/model/Account';
+import { Auth } from 'src/app/model/Auth';
 import { PhysicalPerson } from 'src/app/model/PhysicalPerson';
 import { TranferModel } from 'src/app/model/TransferModel';
 import { LoadingService } from 'src/app/services/loading.service';
 import { MessageService } from 'src/app/services/message.service';
 import { PhysicalPersonService } from 'src/app/services/physical-person.service';
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
+import { Isaldo, subtrairSaldo } from 'src/app/store/saldoReducer';
 import { TransferSuccessComponent } from '../../dialogs/transfer-success/transfer-success.component';
 
 
@@ -30,6 +33,8 @@ export class TransferComponent implements OnInit {
   physicalPersonReturned!:PhysicalPerson;
   tranferModel!:TranferModel;
   listPersons!:Array<any>;
+  currentAccount!:Account;
+  saldo!:Number;
 
   //forms
   formTransfer!:FormGroup;
@@ -38,10 +43,12 @@ export class TransferComponent implements OnInit {
 
   constructor(
     private physicalPersonService:PhysicalPersonService,
-    private messageService:MessageService,
     private savingsAccountService:SavingsAccountService,
     private loadingService:LoadingService,
     private dialog:MatDialog,
+    private saldoReducer:Store<{saldoReducer:Isaldo}>,
+    private authReducer:Store<{authReducer:Auth}>,
+    private messageService:MessageService,
     breakpointObserver: BreakpointObserver
     ) { 
       this.stepperOrientation = breakpointObserver
@@ -60,6 +67,16 @@ export class TransferComponent implements OnInit {
 
     this.confirmeForm = new FormGroup({
       confirme : new FormControl('',[Validators.required])
+    })
+
+    this.saldoReducer.subscribe((val)=>{
+      this.saldo = val.saldoReducer.value
+    });
+
+    this.authReducer.subscribe((val)=>{
+      this.savingsAccountService.getCurrentAccount(Number(val.authReducer.accountId)).subscribe((resp)=>{
+        this.currentAccount = resp;
+      })
     })
   }
 
@@ -129,6 +146,14 @@ export class TransferComponent implements OnInit {
   //Confirme tranfer
   public confirmTranfer(){
 
+    if(this.formTransfer.get('value')?.value > this.saldo){
+      this.messageService.addMessage('Saldo insulficiente para completar operação!','error');
+      return;
+    } else if(this.formTransfer.get('value')?.value < 10){
+      this.messageService.addMessage('O valor a transferir precisa ser no minimo R$10,00 !','error');
+      return;
+    }
+
    let accountDestino:Account = this.physicalPersonReturned.account as Account;
    accountDestino.person = {
     name:this.physicalPersonReturned.name,
@@ -140,7 +165,7 @@ export class TransferComponent implements OnInit {
 
     this.tranferModel ={
       accountDestino,
-      accountOrigem:{id:1},
+      accountOrigem:this.currentAccount,
       value:this.formTransfer.get('value')?.value
     }
 
@@ -151,6 +176,9 @@ export class TransferComponent implements OnInit {
       
       //setting Id of the transfer that was confirmed
       this.tranferModel.id =res.id;
+
+      //subtract value transferred if operations transfer successful
+      this.saldoReducer.dispatch(subtrairSaldo({payload:this.formTransfer.get('value')?.value}));
 
       //sendind transfer full for component TranferSuccessDialog
       this.openTransferDialog(this.tranferModel);

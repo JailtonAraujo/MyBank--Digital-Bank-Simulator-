@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestsInterceptor } from './guards/requests.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { saldoReducer } from './store/saldoReducer';
+import { authReducer } from './store/authReducer';
 
 
 
@@ -35,7 +36,10 @@ import { saldoReducer } from './store/saldoReducer';
     BrowserAnimationsModule,
     PublicModuleModule,
     AccountModuleModule,
-    StoreModule.forRoot({saldoReducer:saldoReducer})
+    StoreModule.forRoot({
+      saldoReducer:saldoReducer,
+      authReducer:authReducer,
+    })
   ],
   exports:[
   ],

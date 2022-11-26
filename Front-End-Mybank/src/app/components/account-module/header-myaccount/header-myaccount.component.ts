@@ -6,13 +6,14 @@ import { SavingsAccountService } from 'src/app/services/savings-account.service'
 import { Isaldo, setSaldo } from 'src/app/store/saldoReducer';
 import { map } from 'rxjs/operators'
 
+import { Auth } from 'src/app/model/Auth';
+
 @Component({
   selector: 'app-header-myaccount',
   templateUrl: './header-myaccount.component.html',
   styleUrls: ['./header-myaccount.component.sass']
 })
 export class HeaderMyaccountComponent implements OnInit {
-  nameUser!:String;
 
   hide=true;
   isOpen=false
@@ -21,16 +22,21 @@ export class HeaderMyaccountComponent implements OnInit {
   constructor(private savingsAccountService:SavingsAccountService, 
     private authService:AuthService,
     private router:Router,
-    private store:Store<{saldoReducer:Isaldo}>) { }
+    private store:Store<{saldoReducer:Isaldo}>,
+    private authReducer:Store<{authReducer:Auth}>
+    ) { }
 
     saldo$ = this.store.select('saldoReducer').pipe(
       map(e=> e.value)
-    )
+    );
+
+    user$ = this.authReducer.select('authReducer').pipe(map(e => e));
 
   ngOnInit(): void {
 
-    const accountId = JSON.parse(String(localStorage.getItem('authMyBank'))).accountId;
-    this.nameUser = JSON.parse(String(localStorage.getItem('authMyBank'))).name;
+    let accountId=0;
+
+    this.user$.subscribe((e)=>{accountId = Number(e.accountId)})
 
     this.savingsAccountService.getSaldoAccountById(Number(accountId)).subscribe((resp)=>{
      this.store.dispatch(setSaldo({payload:Number(resp.toFixed(2))}));

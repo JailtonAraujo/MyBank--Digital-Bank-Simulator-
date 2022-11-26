@@ -2,35 +2,23 @@ package com.br.mybank.Service.impls;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.br.mybank.Model.Operations.TransferOperation;
-import com.br.mybank.Repository.TransferRepository;
-import com.br.mybank.Service.AccountGenericServices;
-import com.br.mybank.exception.UnsupportedMathOperationException;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.br.mybank.BackEndMybankApplication;
-import com.br.mybank.DTO.AccountDTO;
 import com.br.mybank.DTO.AccountReportDTO;
-import com.br.mybank.DTO.AuthDTO;
-import com.br.mybank.DTO.ObjectPaginationOperationsAccount;
-import com.br.mybank.DTO.WithdrawDTO;
 import com.br.mybank.Model.Account;
 import com.br.mybank.Model.SavingsAccount;
+import com.br.mybank.Model.Operations.TransferOperation;
 import com.br.mybank.Model.Operations.WithdrawMoneyOperation;
 import com.br.mybank.Repository.SavingsAccountRepository;
+import com.br.mybank.Repository.TransferRepository;
 import com.br.mybank.Repository.WithdrawRepository;
+import com.br.mybank.Service.AccountGenericServices;
 import com.br.mybank.Service.ReportUtil;
 import com.br.mybank.Service.SavingsAccountService;
-
-import net.sf.jasperreports.engine.JRException;
-import org.springframework.transaction.annotation.Transactional;
+import com.br.mybank.exception.UnsupportedMathOperationException;
 
 @Service
 public class SavingsAccountServiceImpl implements SavingsAccountService {
@@ -140,7 +128,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
 
 	@Override
-	public AccountDTO getCurrentAccount(Long accountId) {
+	public AccountReportDTO getCurrentAccount(Long accountId) {
 		
 		
 		return accountGenericServices.getCurrentAccount(accountId);

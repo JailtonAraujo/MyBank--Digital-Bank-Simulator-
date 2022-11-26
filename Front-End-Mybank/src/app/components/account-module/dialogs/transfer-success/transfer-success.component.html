@@ -3,16 +3,14 @@
   
     <div class="info-origin">
         <h2>Origem:</h2>
-        <p>Nome: Jailton araujo </p>
-        <p>CPF: 545645645645</p>
-        <p>Agência: 45454554</p>
-        <p>Conta: 45454 - 5</p>
+        <p>Nome: {{transfer.accountOrigem.person?.name+" "+transfer.accountOrigem.person?.lastname}}</p>
+        <p>Agência: {{transfer.accountOrigem.agencia}}</p>
+        <p>Conta: {{transfer.accountOrigem.conta}} - {{transfer.accountOrigem.digito}}</p>
     </div>
 
     <div class="info-destiny">
         <h2>Destino:</h2>
-        <p>Nome: {{transfer.accountDestino.person?.name}}</p>
-        <p>CPF: {{transfer.accountDestino.person?.cpf}}</p>
+        <p>Nome: {{transfer.accountDestino.person?.name+" "+transfer.accountDestino.person?.lastname}}</p>
         <p>Agência: {{transfer.accountDestino.agencia}}</p>
         <p>Conta: {{transfer.accountDestino.conta}} - {{transfer.accountDestino.digito}}</p>
     </div>

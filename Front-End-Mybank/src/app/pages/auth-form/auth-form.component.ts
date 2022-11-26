@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Auth } from 'src/app/model/Auth';
 import { SavingsAccount } from 'src/app/model/SavingsAccount';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
+import { setAuth } from 'src/app/store/authReducer';
+import { setSaldo } from 'src/app/store/saldoReducer';
 
 @Component({
   selector: 'app-auth-form',
@@ -22,7 +26,9 @@ export class AuthFormComponent implements OnInit {
     private savingsAccountService:SavingsAccountService,
     private authService:AuthService,
     private messageService:MessageService,
-    private router:Router) { }
+    private router:Router,
+    private store:Store<{authReducer:Auth}>,
+    ) { }
 
   ngOnInit(): void {
     this.account = this.savingsAccountService.getAccountModel();
@@ -48,8 +54,9 @@ export class AuthFormComponent implements OnInit {
     }
     //if success login set auth object in localStorage
     this.authService.login(auth).subscribe((resp)=>{
-      localStorage.setItem('authMyBank',JSON.stringify(resp));
       
+      this.store.dispatch(setAuth({payload:resp}));
+
       this.messageService.addMessage(`Bem vindo ${resp.name}!`,'success');
 
       this.router.navigate(['/myaccount'])

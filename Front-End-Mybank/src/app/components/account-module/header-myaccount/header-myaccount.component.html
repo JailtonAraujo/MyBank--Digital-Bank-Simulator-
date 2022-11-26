@@ -1,7 +1,7 @@
 <header>
     <nav class="nav-bar">
         <div class="self-menu">
-            <button mat-button color="accent" mat-button [matMenuTriggerFor]="selfmenu">➤ Olá, {{nameUser}}</button>
+            <button mat-button color="accent" mat-button [matMenuTriggerFor]="selfmenu">➤ Olá, {{  (user$ | async)!.name }}</button>
             <mat-menu #selfmenu="matMenu">
                 <button mat-menu-item color="warn" id="btn-sair" (click)="(logout())">Sair</button>
                 <a routerLink="/myaccount" mat-menu-item id="btn-inicio">Inicio</a>
@@ -44,7 +44,7 @@
         </div>
         </div>
         <fieldset class="options-mobile">
-            <legend>Ola, {{nameUser}}</legend>
+            <legend>Ola, {{ (user$ | async)!.name}}</legend>
         <ul [classList]="classList">
             <li><a routerLink="withdraw">Saque</a></li>
             <li> <a routerLink="trasnfer">Transferir</a></li>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Auth } from 'src/app/model/Auth';
 import { ObjectPagination } from 'src/app/model/ObjectPagination';
 import { HistoricService } from 'src/app/services/historic.service';
 
@@ -20,17 +22,23 @@ export class HistoricAccountComponent implements OnInit {
   elemenst_transfer=[];
   elements_saque=[];
 
-  constructor(private historicService:HistoricService) { }
+  constructor(private historicService:HistoricService,
+    private authReducer:Store<{authReducer:Auth}>) { }
 
   ngOnInit(): void {
-    this.getAllWithdrawHistoricByAccountId();
+
+    this.authReducer.subscribe((val)=>{
+      this.getAllWithdrawHistoricByAccountId(Number(val.authReducer.accountId));
+    })
+
+    
   }
 
 
-  public getAllWithdrawHistoricByAccountId(){
+  public getAllWithdrawHistoricByAccountId(accountId:number){
 
     const objectPagination:ObjectPagination ={
-      accountId:1,
+      accountId:accountId,
       offset:0,
       limit:10
     }
