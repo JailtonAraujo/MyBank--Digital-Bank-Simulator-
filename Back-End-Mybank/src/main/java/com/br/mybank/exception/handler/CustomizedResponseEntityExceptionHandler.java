@@ -46,14 +46,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<ExceptionResponse>(exceptionResponse,HttpStatus.NOT_FOUND);
     }
     
-    @ExceptionHandler({RuntimeException.class,UsernameNotFoundException.class})
-    public final ResponseEntity<ExceptionResponse> handlerRuntimeExceptions(Exception ex, WebRequest webRequest){
-
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(),webRequest.getDescription(false));
-
-        return new ResponseEntity<ExceptionResponse>(exceptionResponse,HttpStatus.FORBIDDEN);
-    }
-    
     
     @ExceptionHandler({AlreadyExistsCPFException.class})
     public final ResponseEntity<ExceptionResponse> handlerAlreadyExistisCPFExceptions(Exception ex, WebRequest webRequest){

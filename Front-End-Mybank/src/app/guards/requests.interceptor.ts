@@ -6,18 +6,30 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
+import { MessageService } from '../services/message.service';
 
 import {catchError, Observable, throwError} from 'rxjs';
 @Injectable()
 export class RequestsInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private messageService:MessageService) {}
+
+  //Urls that not needs authentication token 
+  urlauthorized = ["savings-account/exists","physical-person/verifyifexistscpf",
+  "physical-person/savings-account","certificate/create/","login"];
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let tempUris = request.url.split("/");
+    const urlBase= environment.UrlBaseApi+"/";
 
-    const currentUri = tempUris[(tempUris.length-1)];
+    const urlForVerify = urlBase+request.url.split(urlBase)[1];
+
+    if(urlForVerify.includes(urlBase+this.urlauthorized[0]) || urlForVerify.includes(urlBase+this.urlauthorized[1]) 
+    || urlForVerify.includes(urlBase+this.urlauthorized[2]) || urlForVerify.includes(urlBase+this.urlauthorized[3])
+    || urlForVerify.includes(urlBase+this.urlauthorized[4])){
+      return next.handle(request).pipe(catchError(this.handlerError));
+    }
 
     if(localStorage.getItem('authMyBank') !== null && localStorage.getItem('authMyBank') !== '')  {
 
@@ -38,7 +50,8 @@ export class RequestsInterceptor implements HttpInterceptor {
   handlerError(error: HttpErrorResponse){
     let errorMsg = '';
     if(error.status == 403){
-      errorMsg = "Acesso negado ou sessão expirada, faça login!";
+      this.messageService.addMessage('Acesso negado ou sessão expirada, faça login!','error');
+      localStorage.clear();
     } else if(error.status == 500){
       errorMsg = "Erro interno, por favor, tente mais tarde";
     }else{

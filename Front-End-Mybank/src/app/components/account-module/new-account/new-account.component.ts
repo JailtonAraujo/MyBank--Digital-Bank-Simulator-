@@ -109,8 +109,10 @@ export class NewAccountComponent implements OnInit {
       this.router.navigate(['account-created']);
 
     },error =>{
-      console.log(error)
-      this.messageService.addMessage(`${error.message}`,'error');
+      if(error.error.message.includes('CPF already exists')){
+        this.messageService.addMessage(`CPF já existente!`,'error');
+      }
+      console.log(error);
       this.loadingService.isLoading(false);
     })
 

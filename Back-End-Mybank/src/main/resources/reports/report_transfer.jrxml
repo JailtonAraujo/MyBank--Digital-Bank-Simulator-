@@ -86,105 +86,126 @@
 				<textField>
 					<reportElement x="20" y="50" width="440" height="30" uuid="9ee604d1-f203-4646-b0f5-03cb061ec9c9"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Debitado da conta de "+$F{accountOrigem}.getPerson().getName()+" "+$F{accountOrigem}.getPerson().getLastname()]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="60" y="10" width="100" height="30" uuid="2943dcc3-9e09-4d13-8cdb-c6db2ebbf0dc"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="20" y="10" width="40" height="30" uuid="1ec5462c-307f-43ff-8f3f-c0e25a7f7bbd"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<text><![CDATA[Data:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="190" y="90" width="80" height="30" uuid="808419a2-8c1f-449f-8553-4fe4da15fbf1"/>
+					<reportElement x="202" y="90" width="80" height="20" uuid="808419a2-8c1f-449f-8553-4fe4da15fbf1">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{accountOrigem}.getAgencia()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="20" y="90" width="170" height="30" uuid="bd635fb3-2889-4225-a88a-e9aa5370d470"/>
+					<reportElement x="20" y="90" width="180" height="20" uuid="bd635fb3-2889-4225-a88a-e9aa5370d470">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<text><![CDATA[Agência e conta do débito:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="420" y="90" width="100" height="30" uuid="62b6b831-cb99-421c-911f-0cfc6d9c9d5e"/>
+					<reportElement x="444" y="90" width="100" height="20" uuid="62b6b831-cb99-421c-911f-0cfc6d9c9d5e">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{accountOrigem}.getConta()+"-"+$F{accountOrigem}.getDigito()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="310" y="90" width="110" height="30" uuid="22b45f89-66de-4245-98fe-ea98b553bb08"/>
+					<reportElement x="302" y="90" width="140" height="20" uuid="22b45f89-66de-4245-98fe-ea98b553bb08">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<text><![CDATA[Conta-poupança:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="19" y="129" width="171" height="31" uuid="d2b73254-858f-4657-8cfd-7e5503ce7b7b"/>
+					<reportElement x="19" y="129" width="181" height="20" uuid="d2b73254-858f-4657-8cfd-7e5503ce7b7b">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<text><![CDATA[Agência e conta do crédito:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="190" y="129" width="80" height="30" uuid="c034db24-346d-4db3-800f-d7ef8015d7d5"/>
+					<reportElement x="204" y="129" width="80" height="20" uuid="c034db24-346d-4db3-800f-d7ef8015d7d5">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{accountDestino}.getAgencia()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="310" y="129" width="110" height="31" uuid="256b51df-caac-4ab6-9455-f563c6e678ed"/>
+					<reportElement x="302" y="129" width="140" height="20" uuid="256b51df-caac-4ab6-9455-f563c6e678ed">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<text><![CDATA[Conta-poupança:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="420" y="130" width="100" height="30" uuid="89ac0c1f-e46e-4d27-98c2-81dfa933e129"/>
+					<reportElement x="442" y="129" width="100" height="20" uuid="89ac0c1f-e46e-4d27-98c2-81dfa933e129">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{accountDestino}.getConta()+"-"+$F{accountDestino}.getDigito()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="19" y="170" width="81" height="31" uuid="5f28da6e-2494-4cca-854f-3820e0717ab7"/>
+					<reportElement x="19" y="170" width="81" height="31" uuid="5f28da6e-2494-4cca-854f-3820e0717ab7">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<text><![CDATA[Favorecido:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="100" y="170" width="360" height="30" uuid="73712be6-fdcc-4a42-9dc7-bceab1c54012"/>
+					<reportElement x="102" y="170" width="360" height="30" uuid="73712be6-fdcc-4a42-9dc7-bceab1c54012">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{accountDestino}.getPerson().getName()+" "+$F{accountDestino}.getPerson().getLastname()]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="20" y="220" width="40" height="31" uuid="a22c15d7-c00a-4770-82c2-9895e9701bde"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<text><![CDATA[Valor:]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="60" y="220" width="140" height="30" uuid="e92d0358-4052-48de-8b29-318354d5a891"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="14"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
 				</textField>

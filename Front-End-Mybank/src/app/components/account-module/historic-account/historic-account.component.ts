@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Auth } from 'src/app/model/Auth';
 import { ObjectPagination } from 'src/app/model/ObjectPagination';
 import { HistoricService } from 'src/app/services/historic.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 @Component({
@@ -23,26 +24,29 @@ export class HistoricAccountComponent implements OnInit {
   elements_saque=[];
 
   constructor(private historicService:HistoricService,
-    private authReducer:Store<{authReducer:Auth}>) { }
+    private authReducer:Store<{authReducer:Auth}>,
+    private loadingService:LoadingService) { }
 
   ngOnInit(): void {
 
-    this.authReducer.subscribe((val)=>{
-      this.getAllWithdrawHistoricByAccountId(Number(val.authReducer.accountId));
-    })
+  
 
-    
+    this.authReducer.subscribe((val)=>{
+      this.getAllHistoricByAccountId(Number(val.authReducer.accountId));
+     
+    })
   }
 
 
-  public getAllWithdrawHistoricByAccountId(accountId:number){
+  public getAllHistoricByAccountId(accountId:number){
 
     const objectPagination:ObjectPagination ={
       accountId:accountId,
       offset:0,
       limit:10
     }
-    
+  
+
     this.historicService.getAllSWithdrawHistoricByAccountId(objectPagination).subscribe((res)=>{
       
       this.elements_saque = res.content;
@@ -54,8 +58,9 @@ export class HistoricAccountComponent implements OnInit {
 
       this.elemenst_transfer = res.content;
       this.totalItens_transfer=res.totalElements;
-
+  
     })
+
   } 
 
   public nextPageTblSaque(offset:any){
@@ -66,9 +71,17 @@ export class HistoricAccountComponent implements OnInit {
       limit:10
     }
 
+    this.loadingService.isLoading(true);
+
+
     this.historicService.getAllSWithdrawHistoricByAccountId(objectPagination).subscribe((res)=>{
       this.elements_saque = res.content;
       this.totalItens_saque = res.totalElements;
+
+      this.loadingService.isLoading(false);
+
+    },error=>{
+      this.loadingService.isLoading(false);
     })
   }
 
@@ -81,9 +94,14 @@ export class HistoricAccountComponent implements OnInit {
       limit:10
     }
 
+    this.loadingService.isLoading(true);
+
     this.historicService.getAllTransferHistoricByAccountId(objectPagination).subscribe((res)=>{
       this.elemenst_transfer = res.content;
       this.totalItens_transfer = res.totalElements;
+      
+      this.loadingService.isLoading(false);
+
     })
   }
 

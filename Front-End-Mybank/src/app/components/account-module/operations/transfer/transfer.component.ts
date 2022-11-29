@@ -92,8 +92,10 @@ export class TransferComponent implements OnInit {
     this.loading = true;
 
    this.physicalPersonService.findPersonByName(name).subscribe((resp)=>{
+
     if(resp.length ==  0){
       this.listPersons = [];
+      this.loading = false;
       return;
     }
     
@@ -102,7 +104,6 @@ export class TransferComponent implements OnInit {
     
    },error =>{
     this.listPersons = [];
-    console.log(error);
     this.loading = false;
    })
 
