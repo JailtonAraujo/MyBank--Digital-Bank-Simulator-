@@ -11,6 +11,9 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Auth } from 'src/app/model/Auth';
+import { setAuth } from 'src/app/store/authReducer';
 
 @Component({
   selector: 'app-new-account',
@@ -35,7 +38,8 @@ export class NewAccountComponent implements OnInit {
     private savingsAccountService:SavingsAccountService,
     private router:Router,
     private loadingService:LoadingService,
-    breakpointObserver: BreakpointObserver
+    breakpointObserver: BreakpointObserver,
+    private authReducer:Store<{authReducer:Auth}>
     ) { 
       this.stepperOrientation = breakpointObserver
       .observe('(min-width: 600px)')
@@ -103,10 +107,18 @@ export class NewAccountComponent implements OnInit {
 
     this.physicalPersonService.createdNewSavingsAccount(this.physicalPerson).subscribe((resp)=>{
 
-      this.savingsAccountService.setAccountModel(resp);
-      this.loadingService.isLoading(false);
+      this.authReducer.dispatch(setAuth({payload:resp}));
 
-      this.router.navigate(['account-created']);
+      this.savingsAccountService.getCurrentAccount(Number(resp.accountId)).subscribe((resp)=>{
+
+        this.savingsAccountService.setAccountModel(resp);
+
+        this.router.navigate(['account-created']);
+
+        this.loadingService.isLoading(false);
+      })
+
+      
 
     },error =>{
       if(error.error.message.includes('CPF already exists')){

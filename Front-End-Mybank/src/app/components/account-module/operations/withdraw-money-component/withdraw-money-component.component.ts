@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { Isaldo, subtrairSaldo } from 'src/app/store/saldoReducer';
 import { Auth } from 'src/app/model/Auth';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-withdraw-money-component',
@@ -31,7 +32,12 @@ export class WithdrawMoneyComponentComponent implements OnInit {
     private savingsAccountService:SavingsAccountService,
     private dialog:MatDialog,
     private saldoReducer:Store<{saldoReducer:Isaldo}>,
-    private authReducer:Store<{authReducer:Auth}>) { }
+    private authReducer:Store<{authReducer:Auth}>,
+    private loadingService:LoadingService
+    )
+     { }
+    
+    
 
   ngOnInit(): void {
 
@@ -66,6 +72,8 @@ export class WithdrawMoneyComponentComponent implements OnInit {
     this.withdrawModel= this.formWithdraw.value;
     this.withdrawModel.account = this.CurrentAccount
 
+    this.loadingService.isLoading(true);
+
     this.savingsAccountService.withDrawMoney(this.withdrawModel).subscribe((resp)=>{
      
       this.withdrawModel.date = resp.date;
@@ -74,9 +82,12 @@ export class WithdrawMoneyComponentComponent implements OnInit {
       this.saldoReducer.dispatch(subtrairSaldo({payload:Number(this.formWithdraw.get('value')!.value)}));
 
       this.openDialogWithdrawSuccess(this.withdrawModel);
+
+      this.loadingService.isLoading(false);
       
     },error=>{
       this.messageService.addMessage('Opps...Um erro inesperado ocerreu, tente mais tarde!','error');
+      this.loadingService.isLoading(false);
     })
     
   }

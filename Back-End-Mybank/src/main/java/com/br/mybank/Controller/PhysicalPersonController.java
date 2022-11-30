@@ -4,21 +4,25 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
-import com.br.mybank.DTO.PersonDTO;
-import com.br.mybank.DTO.PhysicalPersonDTO;
-import com.br.mybank.Model.Account;
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.br.mybank.DTO.AccountDTO;
+import com.br.mybank.DTO.AuthDTO;
+import com.br.mybank.DTO.PhysicalPersonDTO;
+import com.br.mybank.Model.Account;
 import com.br.mybank.Model.PhysicalPerson;
 import com.br.mybank.Service.PhysicalPersonService;
 import com.br.mybank.exception.AlreadyExistsCPFException;
-
-import javax.persistence.NoResultException;
 
 @RestController
 @RequestMapping("/physical-person")
@@ -40,15 +44,13 @@ public class PhysicalPersonController {
     
 
     @PostMapping(value = "/savings-account")
-    public ResponseEntity<AccountDTO> registerNewPersonAndSavingsAccount(@RequestBody PhysicalPerson physicalPerson) throws SQLIntegrityConstraintViolationException {
+    public ResponseEntity<AuthDTO> registerNewPersonAndSavingsAccount(@RequestBody PhysicalPerson physicalPerson) throws SQLIntegrityConstraintViolationException {
 
         if (this.physicalPersonService.verifyIfExistsCpf(physicalPerson.getCpf())) {
             throw new SQLIntegrityConstraintViolationException("CPF already exists!");
         } else {
 
-            AccountDTO accountDTO = new AccountDTO(this.physicalPersonService.registerNewPerson(physicalPerson).getAccount());
-
-            return ResponseEntity.ok(accountDTO);
+            return ResponseEntity.ok(this.physicalPersonService.registerNewPerson(physicalPerson));
         }
     }
 

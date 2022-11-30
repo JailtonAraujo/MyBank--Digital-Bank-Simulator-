@@ -1,5 +1,6 @@
 package com.br.mybank.Service;
 
+import com.br.mybank.DTO.AuthDTO;
 import com.br.mybank.DTO.PhysicalPersonDTO;
 import com.br.mybank.Model.Account;
 import com.br.mybank.Model.PhysicalPerson;
@@ -13,7 +14,7 @@ public interface PhysicalPersonService {
 	public Boolean verifyIfExistsCpf (String cpf);
 	
 	//Register new physical person with account in DataBase//
-	public PhysicalPerson registerNewPerson(PhysicalPerson physicalPerson);
+	public AuthDTO registerNewPerson(PhysicalPerson physicalPerson);
 	
 	public List<PhysicalPersonDTO> findByName(String name);
 	

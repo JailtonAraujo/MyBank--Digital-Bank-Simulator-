@@ -13,7 +13,7 @@ import {catchError, Observable, throwError} from 'rxjs';
 @Injectable()
 export class RequestsInterceptor implements HttpInterceptor {
 
-  constructor(private messageService:MessageService) {}
+  constructor() {}
 
   //Urls that not needs authentication token 
   urlauthorized = ["savings-account/exists","physical-person/verifyifexistscpf",
@@ -50,7 +50,7 @@ export class RequestsInterceptor implements HttpInterceptor {
   handlerError(error: HttpErrorResponse){
     let errorMsg = '';
     if(error.status == 403){
-      this.messageService.addMessage('Acesso negado ou sessão expirada, faça login!','error');
+      console.log("Acesso negado ou sessão expirada, faça login!");
       localStorage.clear();
     } else if(error.status == 500){
       errorMsg = "Erro interno, por favor, tente mais tarde";
@@ -60,6 +60,6 @@ export class RequestsInterceptor implements HttpInterceptor {
     }
 
     console.log(errorMsg);
-    return throwError(errorMsg);
+    return throwError(error);
   }
 }

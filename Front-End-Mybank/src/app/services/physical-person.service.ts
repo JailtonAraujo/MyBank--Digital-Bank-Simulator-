@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { SavingsAccount } from '../model/SavingsAccount';
 import { PhysicalPerson } from '../model/PhysicalPerson';
 import { Account } from '../model/Account';
+import { Auth } from '../model/Auth';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class PhysicalPersonService {
   }
 
   public createdNewSavingsAccount(physicalPerson:PhysicalPerson){
-    return this.http.post<SavingsAccount>(`${this.urlBaseApiPhysicalPerson}/savings-account`,physicalPerson);
+    return this.http.post<Auth>(`${this.urlBaseApiPhysicalPerson}/savings-account`,physicalPerson);
   }
 
   public findPersonByName(name:string){

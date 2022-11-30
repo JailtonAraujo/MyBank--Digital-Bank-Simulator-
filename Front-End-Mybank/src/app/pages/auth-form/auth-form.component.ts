@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { SavingsAccountService } from 'src/app/services/savings-account.service';
 import { setAuth } from 'src/app/store/authReducer';
-import { setSaldo } from 'src/app/store/saldoReducer';
 
 @Component({
   selector: 'app-auth-form',
@@ -61,7 +60,9 @@ export class AuthFormComponent implements OnInit {
 
       this.router.navigate(['/myaccount'])
     },error=>{
+      
       if(error.status == 403){
+        
         this.messageService.addMessage('Informações de conta ou senha incorreta!','error');
       }else{
       this.messageService.addMessage('opss, algo aconteceu, por favor tente mais tarde!','warning');

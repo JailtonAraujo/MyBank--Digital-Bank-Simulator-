@@ -19,6 +19,8 @@ export class HeaderMyaccountComponent implements OnInit {
   isOpen=false
   classList=['links']
 
+  accountId = 0;
+
   constructor(private savingsAccountService:SavingsAccountService, 
     private authService:AuthService,
     private router:Router,
@@ -38,6 +40,8 @@ export class HeaderMyaccountComponent implements OnInit {
 
     this.user$.subscribe((e)=>{accountId = Number(e.accountId)})
 
+    this.accountId = accountId;
+
     this.savingsAccountService.getSaldoAccountById(Number(accountId)).subscribe((resp)=>{
      this.store.dispatch(setSaldo({payload:Number(resp.toFixed(2))}));
     })
@@ -51,6 +55,15 @@ export class HeaderMyaccountComponent implements OnInit {
   public logout(){
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  refreshSaldo(){
+
+    this.hide = !this.hide;
+
+    this.savingsAccountService.getSaldoAccountById(Number(this.accountId)).subscribe((resp)=>{
+      this.store.dispatch(setSaldo({payload:Number(resp.toFixed(2))}));
+     })
   }
 
 }
