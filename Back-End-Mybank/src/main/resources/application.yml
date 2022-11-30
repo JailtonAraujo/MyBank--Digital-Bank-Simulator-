@@ -1,19 +1,20 @@
 spring:
   datasource:
     password: 12345
-    url: jdbc:mysql://localhost:3306/mybank_db
+    url: jdbc:mysql://localhost/mybank_db
     username: root
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#    show-sql: true
 
 server:
+  port: 8082
   servlet:
     context-path: /api
     
 jwt:
-  secret: f8460fcd-42e3-4bfd-a6c6-c07023625bd7
+  secret: minha secret
