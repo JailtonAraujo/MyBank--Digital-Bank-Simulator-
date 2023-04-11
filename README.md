@@ -7,3 +7,6 @@ MyBank is a Digital Bank Simulator made with Java in Rest Arquiteture, Spring Fr
 The project is running in a docker container on a VPS...
 
 Link: http://jailtonprojetos.tech/mybank/#/
+
+![mybank](https://user-images.githubusercontent.com/90009939/231234277-f407771b-2738-4786-975a-344b9918cd2d.png)
+
